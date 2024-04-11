@@ -45,6 +45,21 @@ class EnglishLanguage {
       LanguageKey.period: 'Period',
       LanguageKey.overview: 'Overview',
 
+      // Kid
+      LanguageKey.captureKidCare: 'Capture kid care',
+      LanguageKey.sun: 'Sun',
+      LanguageKey.mon: 'Mon',
+      LanguageKey.tue: 'Tue',
+      LanguageKey.thu: 'Thu',
+      LanguageKey.fri: 'Fri',
+      LanguageKey.sat: 'Sat',
+      LanguageKey.wed: 'Wed',
+      LanguageKey.history: 'History',
+      LanguageKey.viewAll: 'View All',
+      LanguageKey.babyVisitConfirm: 'Baby visit confirmation',
+      LanguageKey.confirmYourVisit: 'Confirming your visit with love',
+      LanguageKey.yesSure: 'Yes, sure',
+
       // Setting
       LanguageKey.category: 'Category',
       LanguageKey.logOut: 'Log out',

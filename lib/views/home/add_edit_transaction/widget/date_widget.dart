@@ -12,6 +12,7 @@ class DateWidget extends StatelessWidget {
   final double? topPadding;
   final String? type;
   final Function(DateTime) selectedDateAction;
+  final String? format;
   const DateWidget({
     super.key,
     required this.date,
@@ -19,6 +20,7 @@ class DateWidget extends StatelessWidget {
     required this.previousAction,
     this.topPadding,
     this.type,
+    this.format,
     required this.selectedDateAction,
   });
 
@@ -34,10 +36,12 @@ class DateWidget extends StatelessWidget {
           Container(
             alignment: Alignment.centerLeft,
             child: Text(
-              AppHelper.checkDateShow(
-                AppHelper.convertDateTimeMMddYYYY(date),
-                type: type,
-              ),
+              format != null
+                  ? AppHelper.convertDatetoStringWithFormat(date, format!)
+                  : AppHelper.checkDateShow(
+                      AppHelper.convertDateTimeMMddYYYY(date),
+                      type: type,
+                    ),
               textAlign: TextAlign.left,
               style: TextStyles.mediumTextStyle(
                 size: 14.0,
@@ -53,43 +57,45 @@ class DateWidget extends StatelessWidget {
             height: 20.0,
             alignment: Alignment.centerLeft,
             child: InkWell(
-              onTap: () {
-                showDatePicker(
-                  context: context,
-                  initialDate: date,
-                  firstDate: DateTime(1950),
-                  lastDate: DateTime(2050),
-                  builder: (context, child) {
-                    return Localizations(
-                      locale: const Locale('en'),
-                      delegates: const <LocalizationsDelegate<dynamic>>[
-                        DefaultWidgetsLocalizations.delegate,
-                        DefaultMaterialLocalizations.delegate,
-                      ],
-                      child: MediaQuery(
-                        data: const MediaQueryData(),
-                        child: Theme(
-                          data: ThemeData.light().copyWith(
-                            primaryColor: AppColor.pinkF27781,
-                            hintColor: AppColor.pinkEB3B6A,
-                            colorScheme: const ColorScheme.light(
-                              primary: AppColor.pinkF27781,
+              onTap: format != null
+                  ? null
+                  : () {
+                      showDatePicker(
+                        context: context,
+                        initialDate: date,
+                        firstDate: DateTime(1950),
+                        lastDate: DateTime(2050),
+                        builder: (context, child) {
+                          return Localizations(
+                            locale: const Locale('en'),
+                            delegates: const <LocalizationsDelegate<dynamic>>[
+                              DefaultWidgetsLocalizations.delegate,
+                              DefaultMaterialLocalizations.delegate,
+                            ],
+                            child: MediaQuery(
+                              data: const MediaQueryData(),
+                              child: Theme(
+                                data: ThemeData.light().copyWith(
+                                  primaryColor: AppColor.pinkF27781,
+                                  hintColor: AppColor.pinkEB3B6A,
+                                  colorScheme: const ColorScheme.light(
+                                    primary: AppColor.pinkF27781,
+                                  ),
+                                  buttonTheme: const ButtonThemeData(
+                                    textTheme: ButtonTextTheme.primary,
+                                  ),
+                                ),
+                                child: child!,
+                              ),
                             ),
-                            buttonTheme: const ButtonThemeData(
-                              textTheme: ButtonTextTheme.primary,
-                            ),
-                          ),
-                          child: child!,
-                        ),
-                      ),
-                    );
-                  },
-                ).then((pickedDate) {
-                  if (pickedDate != null) {
-                    selectedDateAction(pickedDate);
-                  }
-                });
-              },
+                          );
+                        },
+                      ).then((pickedDate) {
+                        if (pickedDate != null) {
+                          selectedDateAction(pickedDate);
+                        }
+                      });
+                    },
               child: Image.asset(
                 AppImages.icCalendar,
                 width: 20.0,

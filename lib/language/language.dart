@@ -45,6 +45,21 @@ class LanguageKey {
   static const period = 'period';
   static const overview = 'overview';
 
+  // Kid
+  static const captureKidCare = 'capture_kid_care';
+  static const mon = 'mon';
+  static const tue = 'tue';
+  static const wed = 'wed';
+  static const thu = 'thu';
+  static const fri = 'fri';
+  static const sat = 'sat';
+  static const sun = 'sun';
+  static const history = 'history';
+  static const viewAll = 'view_all';
+  static const babyVisitConfirm = 'Baby visit confirmation';
+  static const confirmYourVisit = 'Confirming your visit with love';
+  static const yesSure = 'yes_sure';
+
   // Setting
   static const category = 'category';
   static const logOut = 'log_out';

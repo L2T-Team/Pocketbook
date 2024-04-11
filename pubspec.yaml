@@ -33,6 +33,7 @@ dependencies:
   image_cropper: any
   collection: any
   flutter_slidable: any
+  tap_debouncer: any
 
 # dev_dependencies
 dev_dependencies:

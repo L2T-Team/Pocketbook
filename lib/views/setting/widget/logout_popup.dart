@@ -96,7 +96,7 @@ class LogoutPopup extends StatelessWidget {
                           Get.offAndToNamed(RoutesName.login);
                         },
                         child: Text(
-                          LanguageKey.logOut.tr,
+                          LanguageKey.yesLogOut.tr,
                           textAlign: TextAlign.center,
                           style: TextStyles.mediumTextStyle(
                             size: 16.0,
