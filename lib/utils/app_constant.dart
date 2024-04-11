@@ -41,6 +41,9 @@ class AdsVideoSource {
 
 class DateConstant {
   static const String dateMMddYYYY = 'MM/dd/yyyy';
+  static const String dateYYYY = 'yyyy';
+  static const String dateMMYYYY = 'MMMM yyyy';
+  static const String dateMMMYYYY = 'MMM yyyy';
   static const String dateFormatyyyyMMddEEE = 'yyyy/MM/dd(EEE)';
   static const String dateFormatyyyyMMdd2 = 'yyyyMMdd';
   static const String dateFormatyyyyMdE = 'yyyy/M/d(E)';

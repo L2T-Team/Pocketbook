@@ -29,4 +29,6 @@ class AppImages {
   static const String icPrevious = 'assets/images/previous.png';
   static const String icNext = 'assets/images/next.png';
   static const String icMore = 'assets/images/ic_more.png';
+  static const String icUpTrend = 'assets/images/ic_up_trend.png';
+  static const String icDownTrend = 'assets/images/ic_down_trend.png';
 }

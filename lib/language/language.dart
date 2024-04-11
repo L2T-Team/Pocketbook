@@ -38,6 +38,13 @@ class LanguageKey {
   static const addNewTransaction = 'add_new_transaction';
   static const more = 'more';
 
+  // Report
+  static const day = 'day';
+  static const month = 'month';
+  static const year = 'year';
+  static const period = 'period';
+  static const overview = 'overview';
+
   // Setting
   static const category = 'category';
   static const logOut = 'log_out';

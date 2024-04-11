@@ -199,11 +199,24 @@ class AppHelper {
   }
 
   /// Check Date Show
-  static String checkDateShow(String date) {
+  static String checkDateShow(String date, {String? type}) {
     final dateShow = AppHelper.convertStringToDateWithFormat(
       date,
       DateConstant.dateMMddYYYY,
     );
+    if (type == LanguageKey.month.tr) {
+      return AppHelper.convertDatetoStringWithFormat(
+        dateShow,
+        DateConstant.dateMMYYYY,
+      );
+    } else if (type == LanguageKey.year.tr) {
+      return AppHelper.convertDatetoStringWithFormat(
+        dateShow,
+        DateConstant.dateYYYY,
+      );
+    }
+
+    /// Type Date/Period
     final dateNow = DateTime(
       DateTime.now().year,
       DateTime.now().month,
@@ -229,5 +242,13 @@ class AppHelper {
     return date1.year == date2.year &&
         date1.month == date2.month &&
         date1.day == date2.day;
+  }
+
+  /// Get days in month
+  static int daysInMonth(DateTime date) {
+    var firstDayThisMonth = DateTime(date.year, date.month, date.day);
+    var firstDayNextMonth = DateTime(firstDayThisMonth.year,
+        firstDayThisMonth.month + 1, firstDayThisMonth.day);
+    return firstDayNextMonth.difference(firstDayThisMonth).inDays;
   }
 }

@@ -123,8 +123,16 @@ class ListTransactionWidget extends StatelessWidget {
                           ),
                           child: SizedBox(
                             height: 64.0,
-                            child: InkWell(
-                              onTap: () {
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                minimumSize: Size.zero,
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                              onPressed: () {
                                 selectedAction(tran);
                               },
                               child: SizedBox(
@@ -192,11 +200,14 @@ class ListTransactionWidget extends StatelessWidget {
                                       alignment: Alignment.centerRight,
                                       margin: const EdgeInsets.only(right: 3),
                                       child: Text(
-                                        '-\$${AppHelper.formatNumber(tran.amount ?? 0)}',
+                                        '${tran.category?.type == LanguageKey.income.tr ? '+' : '-'}\$${AppHelper.formatNumber(tran.amount ?? 0)}',
                                         textAlign: TextAlign.left,
                                         style: TextStyles.normalTextStyle(
                                           size: 14.0,
-                                          color: AppColor.redEF4444,
+                                          color: tran.category?.type ==
+                                                  LanguageKey.income.tr
+                                              ? AppColor.green10B981
+                                              : AppColor.redEF4444,
                                         ),
                                       ),
                                     ),
@@ -210,6 +221,11 @@ class ListTransactionWidget extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+
+              /// Botttom Spacing
+              SizedBox(
+                height: (listTransactions.length - 1) == index ? 24.0 : 0,
               ),
             ],
           );

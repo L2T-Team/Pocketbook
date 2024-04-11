@@ -62,6 +62,9 @@ class AddEditTransactionView extends GetWidget<AddEditTransactionController> {
                           date: controller.currentDate.value,
                           nextAction: controller.nextDateAction,
                           previousAction: controller.previousDateAction,
+                          selectedDateAction: (DateTime date) {
+                            controller.currentDate.value = date;
+                          },
                         ),
                       ),
 

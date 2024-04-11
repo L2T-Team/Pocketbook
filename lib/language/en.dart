@@ -38,6 +38,13 @@ class EnglishLanguage {
       LanguageKey.addNewTransaction: 'Add new transaction',
       LanguageKey.more: 'More',
 
+      // Report
+      LanguageKey.day: 'Day',
+      LanguageKey.month: 'Month',
+      LanguageKey.year: 'Year',
+      LanguageKey.period: 'Period',
+      LanguageKey.overview: 'Overview',
+
       // Setting
       LanguageKey.category: 'Category',
       LanguageKey.logOut: 'Log out',

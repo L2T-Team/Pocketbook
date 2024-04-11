@@ -5,9 +5,11 @@ import 'package:pocketbook/utils/app_style.dart';
 
 class HeaderWidget extends StatelessWidget {
   final String title;
+  final bool? isHiddenBack;
   const HeaderWidget({
     super.key,
     required this.title,
+    this.isHiddenBack,
   });
 
   @override
@@ -36,32 +38,34 @@ class HeaderWidget extends StatelessWidget {
                   height: 54.0,
                   width: 68.0,
                   alignment: Alignment.center,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      minimumSize: Size.zero,
-                      padding: EdgeInsets.zero,
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
-                    onPressed: () {
-                      Get.back();
-                    },
-                    child: Container(
-                      height: 54.0,
-                      width: 68.0,
-                      alignment: Alignment.center,
-                      child: Container(
-                        height: 20.0,
-                        width: 20.0,
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          AppImages.icBack,
-                          height: 20.0,
-                          width: 20.0,
-                          fit: BoxFit.cover,
+                  child: isHiddenBack == true
+                      ? const SizedBox()
+                      : TextButton(
+                          style: TextButton.styleFrom(
+                            minimumSize: Size.zero,
+                            padding: EdgeInsets.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: Container(
+                            height: 54.0,
+                            width: 68.0,
+                            alignment: Alignment.center,
+                            child: Container(
+                              height: 20.0,
+                              width: 20.0,
+                              alignment: Alignment.center,
+                              child: Image.asset(
+                                AppImages.icBack,
+                                height: 20.0,
+                                width: 20.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ),
 
                 /// Title
