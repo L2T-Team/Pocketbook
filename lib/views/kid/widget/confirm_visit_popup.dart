@@ -99,10 +99,17 @@ class ConfirmVisitPopup extends StatelessWidget {
                     /// Delete
                     Container(
                       height: 40.0,
-                      width: 101.0,
+                      width: 114.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(24.0),
-                        color: AppColor.redE91C2B,
+                        gradient: const LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [
+                            AppColor.pinkF27781,
+                            AppColor.pinkF2A0C6,
+                          ],
+                        ),
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(24.0),
@@ -118,7 +125,7 @@ class ConfirmVisitPopup extends StatelessWidget {
                             confirmAction();
                           },
                           child: Text(
-                            LanguageKey.delete.tr,
+                            LanguageKey.yesSure.tr,
                             textAlign: TextAlign.center,
                             style: TextStyles.mediumTextStyle(
                               size: 16.0,

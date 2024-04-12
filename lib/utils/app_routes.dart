@@ -5,6 +5,8 @@ import 'package:pocketbook/views/home/detail_transaction/detail_transaction_bind
 import 'package:pocketbook/views/home/detail_transaction/detail_transaction_view.dart';
 import 'package:pocketbook/views/home/home_binding.dart';
 import 'package:pocketbook/views/home/home_view.dart';
+import 'package:pocketbook/views/kid/history_kid/history_kid_binding.dart';
+import 'package:pocketbook/views/kid/history_kid/history_kid_view.dart';
 import 'package:pocketbook/views/kid/kid_binding.dart';
 import 'package:pocketbook/views/kid/kid_view.dart';
 import 'package:pocketbook/views/login/login_binding.dart';
@@ -81,6 +83,12 @@ class AppRoutes {
       page: () => const AddEditTransactionView(),
       binding: AddEditTransactionBinding(),
     ),
+
+    GetPage(
+      name: RoutesName.historyKid,
+      page: () => const HistoryKidView(),
+      binding: HistoryKidBinding(),
+    ),
   ];
 }
 
@@ -101,4 +109,5 @@ class RoutesName {
   static const String addEditCategory = '/add-edit-category';
   static const String transactionDetail = '/transaction-detail';
   static const String addEditTransaction = '/add-edit-transaction';
+  static const String historyKid = '/history-kid';
 }

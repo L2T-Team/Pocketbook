@@ -58,6 +58,9 @@ class CalendarWidget extends GetView<KidController> {
 
                 /// LIST DATE IN MONTH
                 _buildListDateInMonth(context, listDateItem),
+
+                /// SPACING
+                const SizedBox(height: 12.0),
               ],
             ),
           );
@@ -129,19 +132,25 @@ class CalendarWidget extends GetView<KidController> {
 
   /// ITEM DATE
   Widget _buildItemDate(BuildContext context, DateCalendarModel item) {
-    bool isSelected = false;
-    bool isToday = false;
     bool isCurrentMonth = item.isCurrentMonth;
+    final filter = controller.listKids.value.where((element) {
+      final dateShow = AppHelper.convertStringToDateWithFormat(
+        element.date ?? '',
+        DateConstant.dateMMddYYYY,
+      );
+      return AppHelper.checkTheSameDate(item.datetime, dateShow);
+    }).toList();
+    bool isConfirm = filter.isNotEmpty;
 
-    isToday = AppHelper.checkTheSameDate(item.datetime, DateTime.now());
-    isSelected = AppHelper.checkTheSameDate(
-      item.datetime,
-      controller.currentDate.value,
-    );
+    bool isToday = AppHelper.checkTheSameDate(item.datetime, DateTime.now());
+    // bool isSelected = AppHelper.checkTheSameDate(
+    //   item.datetime,
+    //   controller.currentDate.value,
+    // );
 
     return TapDebouncer(
       onTap: () async {
-        controller.currentDate(item.datetime);
+        controller.confirmKidAction(context, item.datetime);
       },
       builder: (context, onTap) => InkWell(
         onTap: onTap,
@@ -159,8 +168,8 @@ class CalendarWidget extends GetView<KidController> {
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
                     colors: [
-                      AppColor.pinkF27781.withOpacity(isSelected ? 1 : 0),
-                      AppColor.pinkF2A0C6.withOpacity(isSelected ? 1 : 0),
+                      AppColor.pinkF27781.withOpacity(isToday ? 1 : 0),
+                      AppColor.pinkF2A0C6.withOpacity(isToday ? 1 : 0),
                     ],
                   ),
                 ),
@@ -169,13 +178,11 @@ class CalendarWidget extends GetView<KidController> {
                   item.datetime.day.toString(),
                   textAlign: TextAlign.center,
                   style: styleNormal.copyWith(
-                    color: isToday
-                        ? AppColor.black1C2030
-                        : isSelected
-                            ? AppColor.white
-                            : isCurrentMonth
-                                ? AppColor.black1C2030
-                                : AppColor.greyA9ADBF,
+                    color: isToday // isSelected
+                        ? AppColor.white
+                        : isCurrentMonth
+                            ? AppColor.black1C2030
+                            : AppColor.greyA9ADBF,
                   ),
                 ),
               ),
@@ -187,7 +194,7 @@ class CalendarWidget extends GetView<KidController> {
                 height: 6.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(3.0),
-                  color: AppColor.orangeF2AA88,
+                  color: AppColor.orangeF2AA88.withOpacity(isConfirm ? 1 : 0),
                 ),
               ),
             ],

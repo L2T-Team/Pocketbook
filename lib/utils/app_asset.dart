@@ -31,4 +31,9 @@ class AppImages {
   static const String icMore = 'assets/images/ic_more.png';
   static const String icUpTrend = 'assets/images/ic_up_trend.png';
   static const String icDownTrend = 'assets/images/ic_down_trend.png';
+  static const String icKid = 'assets/images/ic_kid.png';
+  static const String icViewAll = 'assets/images/ic_viewall.png';
+  static const String icDropdownWhite = 'assets/images/dropdown_white.png';
+  static const String icDropdownNext = 'assets/images/dropdown_next.png';
+  static const String icDropdown = 'assets/images/dropdown.png';
 }

@@ -1,6 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/model/responses/date_calendar_model.dart';
+import 'package:pocketbook/model/responses/kid_confirm_model.dart';
+import 'package:pocketbook/utils/app_constant.dart';
 import 'package:pocketbook/utils/app_helper.dart';
+import 'package:pocketbook/utils/app_routes.dart';
+import 'package:pocketbook/views/kid/widget/confirm_visit_popup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pocketbook/repos/auth_repo.dart';
 
@@ -13,6 +18,10 @@ class KidController extends GetxController {
     required this.sharedPreferences,
   });
 
+  final Rx<List<KidConfirmModel>> listKids = Rx<List<KidConfirmModel>>([
+    KidConfirmModel(date: '04/15/2024'),
+    KidConfirmModel(date: '04/12/2024'),
+  ]);
   final Rx<DateTime> currentDate = Rx<DateTime>(
     DateTime(
       DateTime.now().year,
@@ -26,25 +35,23 @@ class KidController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    initData();
+  }
+
+  /// Init data
+  void initData() {
     final listStart = getMonthDates(currentDate.value);
     listDate.value = [listStart];
   }
 
+  /// Get month dates
   List<DateCalendarModel> getMonthDates(DateTime now) {
-    // Get the first day of the current month.
     DateTime firstDayOfMonth = DateTime(now.year, now.month, 1);
-
-    // Get the last day of the current month.
     DateTime lastDayOfMonth = DateTime(now.year, now.month + 1, 0);
-
-    // Get the first day to be shown in the calendar view.
     DateTime start = firstDayOfMonth;
     while (start.weekday != DateTime.monday) {
-      // Start on Monday
       start = start.subtract(const Duration(days: 1));
     }
-
-    // Get the last day to be shown in the calendar view.
     DateTime end = lastDayOfMonth;
     while (end.weekday != DateTime.sunday) {
       // End on Sunday for a Monday-started week
@@ -64,17 +71,75 @@ class KidController extends GetxController {
         ),
       );
     }
-
     return dates;
   }
 
   /// Next Date
   void nextDateAction() {
-    currentDate.value = currentDate.value.add(const Duration(days: 1));
+    if (currentDate.value.month == 12) {
+      currentDate.value = DateTime(
+        currentDate.value.year + 1,
+        1,
+        1,
+      );
+    } else {
+      currentDate.value = DateTime(
+        currentDate.value.year,
+        currentDate.value.month + 1,
+        1,
+      );
+    }
+    initData();
   }
 
   /// Previous Date
   void previousDateAction() {
-    currentDate.value = currentDate.value.subtract(const Duration(days: 1));
+    if (currentDate.value.month == 1) {
+      currentDate.value = DateTime(
+        currentDate.value.year - 1,
+        12,
+        1,
+      );
+    } else {
+      currentDate.value = DateTime(
+        currentDate.value.year,
+        currentDate.value.month - 1,
+        1,
+      );
+    }
+    initData();
+  }
+
+  /// Confirm Kid
+  void confirmKidAction(
+    BuildContext context,
+    DateTime date,
+  ) {
+    showDialog(
+      context: context,
+      useSafeArea: false,
+      builder: (context) {
+        return ConfirmVisitPopup(
+          confirmAction: () {
+            listKids.update((val) {
+              val?.add(
+                KidConfirmModel(
+                  date: AppHelper.convertDatetoStringWithFormat(
+                      date, DateConstant.dateMMddYYYY),
+                ),
+              );
+            });
+          },
+        );
+      },
+    );
+  }
+
+  /// Navigate Hiostory
+  void navigateHistory() {
+    Get.toNamed(
+      RoutesName.historyKid,
+      arguments: listKids.value,
+    );
   }
 }
