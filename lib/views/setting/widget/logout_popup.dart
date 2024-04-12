@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pocketbook/language/language.dart';
+import 'package:pocketbook/utils/app_helper.dart';
 import 'package:pocketbook/utils/app_routes.dart';
 import 'package:pocketbook/utils/app_style.dart';
 import 'package:get/get.dart';
@@ -91,9 +94,16 @@ class LogoutPopup extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
-                        onPressed: () {
-                          /// Tap
-                          Get.offAndToNamed(RoutesName.login);
+                        onPressed: () async {
+                          try {
+                            await FirebaseAuth.instance.signOut();
+                            /// Tap
+                            Get.offAllNamed(RoutesName.login);
+                          } catch (_) {
+                            AppHelper.showError(
+                              LanguageKey.somethingWentWrong.tr,
+                            );
+                          }
                         },
                         child: Text(
                           LanguageKey.yesLogOut.tr,

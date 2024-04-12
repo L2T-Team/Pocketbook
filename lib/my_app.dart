@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/services/app_services/api_services.dart';
 import 'package:pocketbook/services/app_services/app_services.dart';
 import 'package:pocketbook/services/app_services/repo_services.dart';
+import 'package:pocketbook/services/firebase/firebase_service.dart';
 import 'package:pocketbook/utils/app_config.dart';
 import 'package:pocketbook/utils/app_constant.dart';
 import 'package:pocketbook/utils/app_enum.dart';
@@ -20,7 +22,7 @@ Future<void> runMyApp({
   var environment = flavorEnv ?? const String.fromEnvironment('ENV');
   var apiHostUrl = 'http://localhost:3000';
 
-  // await FirebaseService.initFirebaseService();
+  await FirebaseService.initFirebaseService();
 
   /// PRODUCTION
   if (environment == 'production') {
@@ -48,6 +50,9 @@ Future<void> runMyApp({
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
   ]);
+
+  final user = FirebaseAuth.instance.currentUser;
+
   runApp(
     GetMaterialApp(
       localizationsDelegates: const [
@@ -61,7 +66,7 @@ Future<void> runMyApp({
       locale: const Locale(LocaleKey.en, CountryKey.us),
       defaultTransition: Transition.cupertino,
       debugShowCheckedModeBanner: false,
-      initialRoute: RoutesName.main,
+      initialRoute: user != null ? RoutesName.main : RoutesName.login,
       getPages: AppRoutes.mainRoutes,
       theme: AppThemes.lightTheme,
       translations: Language(),

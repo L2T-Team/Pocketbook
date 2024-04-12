@@ -59,20 +59,16 @@ class LoginController extends GetxController {
     });
   }
 
-  /// Continue Button
-  void onTapContinue() {}
-
   /// Login Action
   void login(String email, String password, BuildContext context) async {
     try {
       isLoading(true);
-      UserCredential userCred =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
       isLoading(false);
-      Get.offAndToNamed(RoutesName.main);
+      Get.offAllNamed(RoutesName.main);
     } on FirebaseAuthException catch (e) {
       isLoading(false);
       if (e.code == 'user-not-found') {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/utils/app_asset.dart';
-import 'package:pocketbook/utils/app_routes.dart';
 import 'package:pocketbook/utils/app_style.dart';
 import 'package:pocketbook/views/login/login_controller.dart';
 import 'package:pocketbook/views/login/widget/button_widget.dart';
@@ -135,12 +134,11 @@ class LoginView extends GetWidget<LoginController> {
                             title: LanguageKey.login.tr,
                             onTap: () {
                               FocusScope.of(context).unfocus();
-                              Get.toNamed(RoutesName.main);
-                              // controller.login(
-                              //   controller.controllerUsername.text,
-                              //   controller.controllerPassword.text,
-                              //   context,
-                              // );
+                              controller.login(
+                                controller.controllerUsername.text,
+                                controller.controllerPassword.text,
+                                context,
+                              );
                             },
                             enable: controller.enableButton.value,
                             isLoading: controller.isLoading.value,
