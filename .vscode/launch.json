@@ -1,0 +1,43 @@
+{
+    "configurations": [
+        {
+            "name": "Dev",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "args": [
+                "d",
+                "--web-browser-flag",
+                "--disable-web-security",
+                "--web-renderer",
+                "canvaskit"
+            ]
+        },
+        {
+            "name": "Profile",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "flutterMode": "profile",
+            "args": [
+                "d",
+                "--web-browser-flag",
+                "--disable-web-security",
+                "--web-renderer",
+                "canvaskit"
+            ]
+        },
+        {
+            "name": "Release",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "flutterMode": "release",
+            "args": [
+                "d",
+                "--web-browser-flag",
+                "--disable-web-security"
+            ]
+        }
+    ]
+}

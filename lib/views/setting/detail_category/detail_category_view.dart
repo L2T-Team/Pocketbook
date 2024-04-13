@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/utils/app_style.dart';
@@ -47,25 +49,15 @@ class DetailCategoryView extends GetWidget<DetailCategoryController> {
                               () => (controller.categoryDetail.value?.image ??
                                           '')
                                       .isNotEmpty
-                                  ? Image.network(
-                                      (controller.categoryDetail.value?.image ??
+                                  ? CachedNetworkImage(
+                                      imageUrl: (controller
+                                              .categoryDetail.value?.image ??
                                           ''),
-                                      loadingBuilder:
-                                          (context, child, loadingProgress) {
-                                        if (loadingProgress == null) {
-                                          return child;
-                                        }
-
-                                        return Center(
-                                          child: CircularProgressIndicator(
-                                            value: (loadingProgress
-                                                    .cumulativeBytesLoaded /
-                                                (loadingProgress
-                                                        .expectedTotalBytes ??
-                                                    0)),
-                                          ),
-                                        );
-                                      },
+                                      fit: BoxFit.cover,
+                                      placeholder: (context, url) =>
+                                          SpinKitCircle(
+                                        color: Colors.black.withOpacity(0.5),
+                                      ),
                                     )
                                   : const SizedBox(),
                             ),

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/utils/app_style.dart';
@@ -82,25 +84,14 @@ class CategoryView extends GetWidget<CategoryController> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(28.0),
                                       child: (item.image ?? '').isNotEmpty
-                                          ? Image.network(
-                                              (item.image ?? ''),
-                                              loadingBuilder: (context, child,
-                                                  loadingProgress) {
-                                                if (loadingProgress == null) {
-                                                  return child;
-                                                }
-
-                                                return Center(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    value: (loadingProgress
-                                                            .cumulativeBytesLoaded /
-                                                        (loadingProgress
-                                                                .expectedTotalBytes ??
-                                                            0)),
-                                                  ),
-                                                );
-                                              },
+                                          ? CachedNetworkImage(
+                                              imageUrl: (item.image ?? ''),
+                                              fit: BoxFit.cover,
+                                              placeholder: (context, url) =>
+                                                  SpinKitCircle(
+                                                color: Colors.black
+                                                    .withOpacity(0.5),
+                                              ),
                                             )
                                           : const SizedBox(),
                                     ),

@@ -19,6 +19,7 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
+  
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -38,6 +39,26 @@
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js"></script>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyA3aALIDMsoAlJlAtrUGtf0Q4uQBdZ0LGc",
+        authDomain: "pocketbook-75861.firebaseapp.com",
+        databaseURL: "https://pocketbook-75861-default-rtdb.firebaseio.com",
+        projectId: "pocketbook-75861",
+        storageBucket: "pocketbook-75861.appspot.com",
+        messagingSenderId: "149066493429",
+        appId: "1:149066493429:web:c62ef8586a7662042904bc",
+        measurementId: "G-85KDQ3CW3X"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig)
+    </script>
 </head>
 <body>
   <script>
