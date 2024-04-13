@@ -44,6 +44,8 @@ class ReportView extends GetWidget<ReportController> {
                         itemSelected: controller.selectedTime.value,
                         selectedAction: (String item) {
                           controller.selectedTime.value = item;
+                          controller.calculateCategoryTransaction(
+                              controller.totalTransactions);
                         },
                       ),
                     ),
@@ -58,6 +60,8 @@ class ReportView extends GetWidget<ReportController> {
                         topPadding: 0.0,
                         selectedDateAction: (DateTime date) {
                           controller.currentDate.value = date;
+                          controller.calculateCategoryTransaction(
+                              controller.totalTransactions);
                         },
                       ),
                     ),

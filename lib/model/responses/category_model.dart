@@ -1,8 +1,12 @@
+import 'package:pocketbook/model/responses/transaction_model.dart';
+
 class CategoryModel {
   String? id;
   String? name;
   String? type;
   String? image;
+  List<TransactionModel> listTrans = [];
+
   CategoryModel({
     this.id,
     this.name,
