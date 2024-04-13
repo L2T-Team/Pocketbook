@@ -39,7 +39,36 @@ class DetailCategoryView extends GetWidget<DetailCategoryController> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(40.0),
-                            color: AppColor.grey201913,
+                            color: AppColor.grey201913.withOpacity(0.5),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(40.0),
+                            child: Obx(
+                              () => (controller.categoryDetail.value?.image ??
+                                          '')
+                                      .isNotEmpty
+                                  ? Image.network(
+                                      (controller.categoryDetail.value?.image ??
+                                          ''),
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
+
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value: (loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                (loadingProgress
+                                                        .expectedTotalBytes ??
+                                                    0)),
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : const SizedBox(),
+                            ),
                           ),
                         ),
 

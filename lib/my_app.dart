@@ -1,3 +1,4 @@
+import 'package:event_bus/event_bus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +15,8 @@ import 'package:pocketbook/utils/app_constant.dart';
 import 'package:pocketbook/utils/app_enum.dart';
 import 'package:pocketbook/utils/app_routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+EventBus eventBus = EventBus();
 
 Future<void> runMyApp({
   String? flavorEnv,

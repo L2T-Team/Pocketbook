@@ -1,8 +1,8 @@
-import 'dart:io';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/language/language.dart';
+import 'package:pocketbook/utils/app_asset.dart';
 import 'package:pocketbook/utils/app_style.dart';
 import 'package:pocketbook/views/login/widget/button_widget.dart';
 import 'package:pocketbook/views/login/widget/text_field_widget.dart';
@@ -59,8 +59,31 @@ class AddEditCategoryView extends GetWidget<AddEditCategoryController> {
                             borderRadius: BorderRadius.circular(40.0),
                             child: Obx(
                               () => controller.imageUrl.value.isNotEmpty
-                                  ? Image.file(File(controller.imageUrl.value))
-                                  : const SizedBox(),
+                                  ? Image.network(
+                                      controller.imageUrl.value,
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
+
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value: (loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                (loadingProgress
+                                                        .expectedTotalBytes ??
+                                                    0)),
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : Image.asset(
+                                      AppImages.icImage,
+                                      width: 80.0,
+                                      height: 80.0,
+                                      fit: BoxFit.cover,
+                                    ),
                             ),
                           ),
                         ),
@@ -142,9 +165,11 @@ class AddEditCategoryView extends GetWidget<AddEditCategoryController> {
                     title: controller.categoryDetail.value != null
                         ? LanguageKey.save.tr
                         : LanguageKey.createNew.tr,
-                    onTap: () {},
+                    onTap: () {
+                      controller.addEditAction(context);
+                    },
                     enable: controller.enableButton.value,
-                    isLoading: false,
+                    isLoading: controller.isLoading.value,
                   ),
                 ),
               ),

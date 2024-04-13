@@ -76,7 +76,33 @@ class CategoryView extends GetWidget<CategoryController> {
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(28.0),
-                                      color: AppColor.grey201913,
+                                      color:
+                                          AppColor.grey201913.withOpacity(0.5),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(28.0),
+                                      child: (item.image ?? '').isNotEmpty
+                                          ? Image.network(
+                                              (item.image ?? ''),
+                                              loadingBuilder: (context, child,
+                                                  loadingProgress) {
+                                                if (loadingProgress == null) {
+                                                  return child;
+                                                }
+
+                                                return Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    value: (loadingProgress
+                                                            .cumulativeBytesLoaded /
+                                                        (loadingProgress
+                                                                .expectedTotalBytes ??
+                                                            0)),
+                                                  ),
+                                                );
+                                              },
+                                            )
+                                          : const SizedBox(),
                                     ),
                                   ),
 

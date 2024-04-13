@@ -34,6 +34,9 @@ dependencies:
   collection: any
   flutter_slidable: any
   tap_debouncer: any
+  firebase_storage: any
+  uuid: any
+  event_bus: any
 
 # dev_dependencies
 dev_dependencies:

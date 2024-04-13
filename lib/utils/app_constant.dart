@@ -20,25 +20,6 @@ class ZipcodeIP {
   static const String develop = "https://com-dev03.kuronekoyamato.co.jp";
 }
 
-class AdsVideoSource {
-  static const String devSmallHospital =
-      "https://dev-public-access.s3.ap-northeast-1.amazonaws.com/03_shinsatsumae_FIX_1016_small.mp4";
-  static const String devMediumHospital =
-      "https://dev-public-access.s3.ap-northeast-1.amazonaws.com/03_shinsatsumae_FIX_1016_medium.mp4";
-  static const String devSmallPharmacy =
-      "https://dev-public-access.s3.ap-northeast-1.amazonaws.com/04_hukuyaku_FIX_1016_small.mp4";
-  static const String devMediumPharmacy =
-      "https://dev-public-access.s3.ap-northeast-1.amazonaws.com/04_hukuyaku_FIX_1016_medium.mp4";
-  static const String stagingSmallHospital =
-      "https://staging-public-access.s3.ap-northeast-1.amazonaws.com/03_shinsatsumae_FIX_1016_small.mp4";
-  static const String stagingMediumHospital =
-      "https://staging-public-access.s3.ap-northeast-1.amazonaws.com/03_shinsatsumae_FIX_1016_medium.mp4";
-  static const String stagingSmallPharmacy =
-      "https://staging-public-access.s3.ap-northeast-1.amazonaws.com/04_hukuyaku_FIX_1016_small.mp4";
-  static const String stagingMediumPharmacy =
-      "https://staging-public-access.s3.ap-northeast-1.amazonaws.com/04_hukuyaku_FIX_1016_medium.mp4";
-}
-
 class DateConstant {
   static const String dateMMMM = 'MMMM';
   static const String dateMMddYYYY = 'MM/dd/yyyy';
@@ -148,8 +129,10 @@ class SharePrefKeys {
   final String firstOpenApp = 'first_open_app';
   final String employeeAccessTopScreen = 'employee_access_top_screen';
   final String listEmployeeInstallAppEvent = 'list_employee_install_app_event';
-  final String listEmployeeFirstOpenAppEvent = 'list_employee_first_open_app_event';
-  final String listEmployeeFirstOpenTopEvent = 'list_employee_first_open_top_event';
+  final String listEmployeeFirstOpenAppEvent =
+      'list_employee_first_open_app_event';
+  final String listEmployeeFirstOpenTopEvent =
+      'list_employee_first_open_top_event';
 }
 
 class FirebaseConfigKey {
@@ -161,6 +144,19 @@ class FirebaseConfigKey {
   final String linkCHPlay = 'linkCHPlay';
 }
 
+/// Event Constant
+class EventConstant {
+  static const String categoryEvent = 'category_event';
+}
+
+/// CollectionConstant
+class CollectionConstant {
+  static const String user = 'User';
+  static const String category = 'Category';
+  static const String transaction = 'Transaction';
+}
+
+/// AppConstant
 class AppConstant {
   static SharePrefKeys sharePrefKeys = SharePrefKeys();
   static LocaleKey localeKey = LocaleKey();
@@ -185,6 +181,8 @@ class AppConstant {
   static const prodCustomerTestflightLink =
       'https://testflight.apple.com/join/lFr5LVrX';
   static const prodAppleStoreLink = 'https://apps.apple.com/app/id6469021487';
+  static const imageBaseUrl =
+      'https://firebasestorage.googleapis.com/v0/b/pocketbook-75861.appspot.com/o/';
 }
 
 class MessageTypeWss {
