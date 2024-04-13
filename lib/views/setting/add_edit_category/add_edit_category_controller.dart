@@ -90,42 +90,41 @@ class AddEditCategoryController extends GetxController {
   void cropCircleImage(BuildContext context, XFile file) async {
     isLoading(true);
     try {
-      CroppedFile? croppedFile = await ImageCropper().cropImage(
-        sourcePath: file.path,
-        aspectRatioPresets: [
-          CropAspectRatioPreset.square,
-        ],
-        cropStyle: CropStyle.circle,
-        uiSettings: [
-          AndroidUiSettings(
-              toolbarTitle: '',
-              toolbarColor: Colors.deepOrange,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
-          IOSUiSettings(
-            title: '',
-          ),
-          WebUiSettings(
-            context: context,
-          ),
-        ],
-      );
+      // CroppedFile? croppedFile = await ImageCropper().cropImage(
+      //   sourcePath: file.path,
+      //   aspectRatioPresets: [
+      //     CropAspectRatioPreset.square,
+      //   ],
+      //   cropStyle: CropStyle.circle,
+      //   uiSettings: [
+      //     AndroidUiSettings(
+      //         toolbarTitle: '',
+      //         toolbarColor: Colors.deepOrange,
+      //         toolbarWidgetColor: Colors.white,
+      //         initAspectRatio: CropAspectRatioPreset.original,
+      //         lockAspectRatio: false),
+      //     IOSUiSettings(
+      //       title: '',
+      //     ),
+      //     WebUiSettings(
+      //       context: context,
+      //     ),
+      //   ],
+      // );
 
       /// Upload
-      final path = croppedFile?.path ?? '';
+      final path = file.path;
       final nameImage = '${const Uuid().v4()}.jpg';
       final metadata = SettableMetadata(contentType: "image/jpeg");
       final storageRef = FirebaseStorage.instance.ref().child(nameImage);
-      final uploadTask = storageRef.putFile(File(path), metadata);
+      final uploadTask = storageRef.putData(await file.readAsBytes(), metadata);
 
       uploadTask.whenComplete(() async {
         imageUrl.value = await storageRef.getDownloadURL();
-        // AppConstant.imageBaseUrl + nameImage;
         isLoading(false);
         validateButtonAction();
       });
-    } catch (_) {
+    } catch (e) {
       isLoading(false);
       AppHelper.showError(LanguageKey.somethingWentWrong.tr);
     }

@@ -61,9 +61,9 @@ class PhotoPopup extends StatelessWidget {
                         AppImages.icTakePhoto,
                         LanguageKey.takePhoto.tr,
                         () async {
-                          final hasPermission =
-                              await AppHelper.handleCameraPermission();
-                          if (!hasPermission) return;
+                          // final hasPermission = 
+                          //     await AppHelper.handleCameraPermission();
+                          // if (!hasPermission) return;
                           final result =
                               await AppHelper.pickImage(ImageSource.camera);
                           if (result != null) {
@@ -79,9 +79,9 @@ class PhotoPopup extends StatelessWidget {
                         AppImages.icLibrary,
                         LanguageKey.chooseFromLibrary.tr,
                         () async {
-                          final hasPermission =
-                              await AppHelper.handleGalleryPermission();
-                          if (!hasPermission) return;
+                          // final hasPermission =
+                          //     await AppHelper.handleGalleryPermission();
+                          // if (!hasPermission) return;
                           final result =
                               await AppHelper.pickImage(ImageSource.gallery);
                           if (result != null) {
