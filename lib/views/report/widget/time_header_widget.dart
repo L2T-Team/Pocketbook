@@ -8,7 +8,7 @@ class TimeHeaderWidget extends StatelessWidget {
     LanguageKey.day.tr,
     LanguageKey.month.tr,
     LanguageKey.year.tr,
-    LanguageKey.period.tr,
+    // LanguageKey.period.tr,
   ];
   final String itemSelected;
   final Function(String) selectedAction;
