@@ -128,7 +128,38 @@ class ReportController extends GetxController {
         listCats.add(category!);
       }
     });
-    listCategories.value = listCats;
+    final filterIn = listCats
+        .where((element) => element.type == LanguageKey.income.tr)
+        .toList();
+    final filterEx = listCats
+        .where((element) => element.type == LanguageKey.expense.tr)
+        .toList();
+    filterIn.sort((a, b) {
+      double amountA = 0.0;
+      double amountB = 0.0;
+      for (var ite in a.listTrans) {
+        amountA += (ite.amount ?? 0);
+      }
+      for (var ite in b.listTrans) {
+        amountB += (ite.amount ?? 0);
+      }
+      return amountB.compareTo(amountA);
+    });
+    filterEx.sort((a, b) {
+      double amountA = 0.0;
+      double amountB = 0.0;
+      for (var ite in a.listTrans) {
+        amountA += (ite.amount ?? 0);
+      }
+      for (var ite in b.listTrans) {
+        amountB += (ite.amount ?? 0);
+      }
+      return amountB.compareTo(amountA);
+    });
+    List<CategoryModel> listFinal = [];
+    listFinal.addAll(filterIn);
+    listFinal.addAll(filterEx);
+    listCategories.value = listFinal;
   }
 
   /// Next Date
