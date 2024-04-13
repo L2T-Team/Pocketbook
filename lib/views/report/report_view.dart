@@ -106,6 +106,17 @@ class ReportView extends GetWidget<ReportController> {
                                             controller.listTransactions.value,
                                         currentDateTime:
                                             controller.currentDate.value,
+                                        selectDateAction: (DateTime date) {
+                                          /// Selected Month
+                                              controller.currentDate.value =
+                                                  date;
+                                              controller.selectedTime.value =
+                                                  LanguageKey.month.tr;
+                                              controller
+                                                  .calculateCategoryTransaction(
+                                                      controller
+                                                          .totalTransactions);
+                                        },
                                       )
                                     : (controller.selectedTime.value ==
                                             LanguageKey.month.tr
