@@ -135,6 +135,7 @@ class AddEditCategoryController extends GetxController {
   /// Add Edit Action
   ///////////////////////////////////////////////
   void addEditAction(BuildContext context) async {
+    FocusScope.of(context).unfocus();
     isLoading(true);
     try {
       final uuid = categoryDetail.value == null

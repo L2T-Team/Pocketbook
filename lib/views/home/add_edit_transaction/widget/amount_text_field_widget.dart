@@ -47,7 +47,7 @@ class AmountTextFieldWidget extends StatelessWidget {
         /// Label
         Container(
           alignment: Alignment.center,
-          margin: const EdgeInsets.only(bottom: 28, right: 12.0),
+          margin: const EdgeInsets.only(bottom: 20.0, right: 12.0),
           child: Text(
             '\$',
             textAlign: TextAlign.center,
@@ -64,49 +64,65 @@ class AmountTextFieldWidget extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                  height: 40,
-                  child: TextField(
-                    style: TextStyles.normalTextStyle(
-                      color: AppColor.black201913,
+                height: 50,
+                child: TextField(
+                  style: TextStyles.normalTextStyle(
+                    color: AppColor.black201913,
+                    size: 40.0,
+                  ),
+                  onChanged: onChange,
+                  focusNode: focusNode,
+                  keyboardType: keyboardType,
+                  inputFormatters: inputFormatters ??
+                      [
+                        FilteringTextInputFormatter.allow(RegExp(r"[0-9.,]")),
+                        TextInputFormatter.withFunction((oldValue, newValue) {
+                          final text = newValue.text;
+                          return text.isEmpty
+                              ? newValue
+                              : double.tryParse(text.replaceAll(',', '.')) ==
+                                      null
+                                  ? oldValue
+                                  : newValue;
+                        }),
+                      ],
+                  maxLength: maxLength,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                  controller: controller,
+                  enabled: enabled ?? true,
+                  onSubmitted: (_) {
+                    if (onSubmitted != null) onSubmitted!.call();
+                  },
+                  obscureText: isObscured ?? false,
+                  textInputAction: isLatestTextField == true
+                      ? TextInputAction.done
+                      : TextInputAction.next,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(0.0),
+                    isDense: true,
+                    counterText: '',
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    hintText: hintText,
+                    hintStyle: TextStyles.normalTextStyle(
                       size: 40.0,
+                      color: AppColor.grey575757,
                     ),
-                    onChanged: onChange,
-                    focusNode: focusNode,
-                    keyboardType: keyboardType,
-                    inputFormatters: inputFormatters,
-                    maxLength: maxLength,
-                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                    controller: controller,
-                    enabled: enabled ?? true,
-                    onSubmitted: (_) {
-                      if (onSubmitted != null) onSubmitted!.call();
-                    },
-                    obscureText: isObscured ?? false,
-                    textInputAction: isLatestTextField == true
-                        ? TextInputAction.done
-                        : TextInputAction.next,
-                    decoration: InputDecoration(
-                      counterText: '',
-                      border: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      hintText: hintText,
-                      hintStyle: TextStyles.normalTextStyle(
-                        size: 40.0,
-                        color: AppColor.grey575757,
-                      ),
-                      suffixIcon: onTapSuffix == null
-                          ? suffixIcon
-                          : Container(
-                              alignment: Alignment.centerRight,
-                              width: 25,
-                              child: InkWell(
-                                onTap: onTapSuffix,
-                                child: suffixIcon,
-                              ),
+                    suffixIcon: onTapSuffix == null
+                        ? suffixIcon
+                        : Container(
+                            alignment: Alignment.centerRight,
+                            width: 25,
+                            child: InkWell(
+                              onTap: onTapSuffix,
+                              child: suffixIcon,
                             ),
-                    ),
-                  )),
+                          ),
+                  ),
+                  maxLines: 1,
+                ),
+              ),
 
               /// Line
               Container(

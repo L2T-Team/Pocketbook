@@ -48,7 +48,7 @@ class TextStyles {
           {double? size,
           Color? color,
           double height = 1.0,
-          String fontFamily = NameFont.dMSans}) =>
+          String? fontFamily = NameFont.dMSans}) =>
       TextStyle(
         fontSize: size,
         fontWeight: FontWeight.normal,

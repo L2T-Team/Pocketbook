@@ -147,10 +147,10 @@ class AddEditTransactionView extends GetWidget<AddEditTransactionController> {
                   child: ButtonWidget(
                     title: LanguageKey.save.tr,
                     onTap: () {
-                      controller.saveAction();
+                      controller.saveAction(context);
                     },
                     enable: controller.enableButton.value,
-                    isLoading: false,
+                    isLoading: controller.isLoading.value,
                   ),
                 ),
               ),

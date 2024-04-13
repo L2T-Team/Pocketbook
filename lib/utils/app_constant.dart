@@ -147,6 +147,7 @@ class FirebaseConfigKey {
 /// Event Constant
 class EventConstant {
   static const String categoryEvent = 'category_event';
+  static const String transactionEvent = 'transaction_event';
 }
 
 /// CollectionConstant

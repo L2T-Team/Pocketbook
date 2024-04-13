@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/model/responses/transaction_model.dart';
-import 'package:pocketbook/utils/app_asset.dart';
 import 'package:pocketbook/utils/app_constant.dart';
 import 'package:pocketbook/utils/app_helper.dart';
 import 'package:pocketbook/utils/app_style.dart';
@@ -121,8 +120,9 @@ class ListTransactionWidget extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: SizedBox(
+                          child: Container(
                             height: 64.0,
+                            color: AppColor.white,
                             child: TextButton(
                               style: TextButton.styleFrom(
                                 minimumSize: Size.zero,
@@ -146,11 +146,32 @@ class ListTransactionWidget extends StatelessWidget {
                                       width: 40.0,
                                       height: 40.0,
                                       alignment: Alignment.center,
-                                      child: Image.asset(
-                                        AppImages.icAvatar,
-                                        width: 40.0,
-                                        height: 40.0,
-                                        fit: BoxFit.cover,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        child: (tran.category?.image ?? '')
+                                                .isNotEmpty
+                                            ? Image.network(
+                                                (tran.category?.image ?? ''),
+                                                loadingBuilder: (context, child,
+                                                    loadingProgress) {
+                                                  if (loadingProgress == null) {
+                                                    return child;
+                                                  }
+
+                                                  return Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      value: (loadingProgress
+                                                              .cumulativeBytesLoaded /
+                                                          (loadingProgress
+                                                                  .expectedTotalBytes ??
+                                                              0)),
+                                                    ),
+                                                  );
+                                                },
+                                              )
+                                            : const SizedBox(),
                                       ),
                                     ),
 
