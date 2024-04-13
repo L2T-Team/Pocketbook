@@ -26,7 +26,7 @@ class EnglishLanguage {
       LanguageKey.setting: 'Me',
 
       // Home
-      LanguageKey.total: 'Total',
+      LanguageKey.total: 'Total balance',
       LanguageKey.transaction: 'Transaction',
       LanguageKey.deleteTransaction: 'Delete transaction',
       LanguageKey.deleteTransactionDescription:

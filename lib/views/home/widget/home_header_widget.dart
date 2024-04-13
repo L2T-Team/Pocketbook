@@ -67,7 +67,7 @@ class HomeHeaderWidget extends StatelessWidget {
                               margin: const EdgeInsets.only(top: 9.0),
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                '\$${AppHelper.formatNumber(total)}',
+                                '${total < 0 ? '-' : ''}\$${AppHelper.formatNumber(total)}',
                                 textAlign: TextAlign.left,
                                 style: TextStyles.normalTextStyle(
                                   size: 40.0,

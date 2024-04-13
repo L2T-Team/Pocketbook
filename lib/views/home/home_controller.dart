@@ -83,7 +83,7 @@ class HomeController extends GetxController {
       }
       income.value = incomeValue;
       expense.value = expenseValue;
-      total.value = income.value + expense.value;
+      total.value = income.value - expense.value;
     } catch (_) {}
   }
 
