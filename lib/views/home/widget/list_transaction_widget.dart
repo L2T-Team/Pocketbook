@@ -148,6 +148,12 @@ class ListTransactionWidget extends StatelessWidget {
                                       width: 40.0,
                                       height: 40.0,
                                       alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        color: AppColor.grey201913
+                                            .withOpacity(0.5),
+                                      ),
                                       child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(20.0),
@@ -157,6 +163,8 @@ class ListTransactionWidget extends StatelessWidget {
                                                 imageUrl:
                                                     (tran.category?.image ??
                                                         ''),
+                                                width: 40.0,
+                                                height: 40.0,
                                                 fit: BoxFit.cover,
                                                 placeholder: (context, url) =>
                                                     SpinKitCircle(

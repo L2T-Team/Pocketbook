@@ -62,14 +62,14 @@ class AddEditCategoryView extends GetWidget<AddEditCategoryController> {
                             child: Obx(
                               () => controller.imageUrl.value.isNotEmpty
                                   ? CachedNetworkImage(
-                                              imageUrl:
-                                      controller.imageUrl.value,
+                                      imageUrl: controller.imageUrl.value,
+                                      width: 80.0,
+                                      height: 80.0,
                                       fit: BoxFit.cover,
-                                              placeholder: (context, url) =>
-                                                  SpinKitCircle(
-                                                color: Colors.black
-                                                    .withOpacity(0.5),
-                                              ),
+                                      placeholder: (context, url) =>
+                                          SpinKitCircle(
+                                        color: Colors.black.withOpacity(0.5),
+                                      ),
                                     )
                                   : Image.asset(
                                       AppImages.icImage,

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/model/responses/category_model.dart';
 import 'package:get/get.dart';
@@ -70,10 +72,29 @@ class ItemCategoryWidget extends StatelessWidget {
                       child: Stack(
                         children: [
                           /// Image
-                          Image.asset(
-                            AppImages.icAvatar,
+                          Container(
                             width: 56.0,
                             height: 56.0,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(28.0),
+                              color: AppColor.grey201913.withOpacity(0.5),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(28.0),
+                              child: (item.image ?? '').isNotEmpty
+                                  ? CachedNetworkImage(
+                                      imageUrl: (item.image ?? ''),
+                                      width: 56.0,
+                                      height: 56.0,
+                                      fit: BoxFit.cover,
+                                      placeholder: (context, url) =>
+                                          SpinKitCircle(
+                                        color: Colors.black.withOpacity(0.5),
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                            ),
                           ),
 
                           /// Check Icon

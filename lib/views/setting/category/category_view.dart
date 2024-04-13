@@ -86,6 +86,8 @@ class CategoryView extends GetWidget<CategoryController> {
                                       child: (item.image ?? '').isNotEmpty
                                           ? CachedNetworkImage(
                                               imageUrl: (item.image ?? ''),
+                                              width: 56.0,
+                                              height: 56.0,
                                               fit: BoxFit.cover,
                                               placeholder: (context, url) =>
                                                   SpinKitCircle(
