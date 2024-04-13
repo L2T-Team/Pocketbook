@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/model/responses/category_model.dart';
@@ -65,7 +66,17 @@ class DetailCategoryController extends GetxController {
           .doc(categoryDetail.value?.id ?? '')
           .delete());
       eventBus.fire(EventConstant.categoryEvent);
+      deleteImageFirestore();
       Get.back();
+    } catch (_) {}
+  }
+
+  /// Delete Image FireStore
+  void deleteImageFirestore() async {
+    try {
+      Reference photoRef = FirebaseStorage.instance.refFromURL(categoryDetail.value?.image ?? '');
+      await photoRef.delete().then((value) {
+      });
     } catch (_) {}
   }
 
