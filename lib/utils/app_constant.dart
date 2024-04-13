@@ -155,6 +155,7 @@ class CollectionConstant {
   static const String user = 'User';
   static const String category = 'Category';
   static const String transaction = 'Transaction';
+  static const String kidConfirm = 'Kid-Confirm';
 }
 
 /// AppConstant

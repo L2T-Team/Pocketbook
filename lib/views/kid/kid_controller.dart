@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/model/responses/date_calendar_model.dart';
@@ -8,6 +10,7 @@ import 'package:pocketbook/utils/app_routes.dart';
 import 'package:pocketbook/views/kid/widget/confirm_visit_popup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pocketbook/repos/auth_repo.dart';
+import 'package:uuid/uuid.dart';
 
 class KidController extends GetxController {
   AuthRepo authRepo;
@@ -18,10 +21,7 @@ class KidController extends GetxController {
     required this.sharedPreferences,
   });
 
-  final Rx<List<KidConfirmModel>> listKids = Rx<List<KidConfirmModel>>([
-    KidConfirmModel(date: '04/15/2024'),
-    KidConfirmModel(date: '04/12/2024'),
-  ]);
+  final Rx<List<KidConfirmModel>> listKids = Rx<List<KidConfirmModel>>([]);
   final Rx<DateTime> currentDate = Rx<DateTime>(
     DateTime(
       DateTime.now().year,
@@ -36,6 +36,68 @@ class KidController extends GetxController {
   void onInit() {
     super.onInit();
     initData();
+    getKidConfirms();
+  }
+
+  //////////////////////////////////////////////////////////
+  /// Get Kid Confirm
+  //////////////////////////////////////////////////////////
+  void getKidConfirms() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      final List<KidConfirmModel> listKidsConfirm = [];
+      final listFirebase = (await FirebaseFirestore.instance
+              .collection(CollectionConstant.user)
+              .doc(user?.uid ?? '')
+              .collection(CollectionConstant.kidConfirm)
+              .get())
+          .docs;
+
+      for (var it in listFirebase) {
+        listKidsConfirm.add(KidConfirmModel.fromJson(it));
+      }
+      /// Sort
+      listKidsConfirm.sort((a, b) {
+        final date1 = AppHelper.convertStringToDateWithFormat(
+          a.date ?? '',
+          DateConstant.dateMMddYYYY,
+        );
+        final date2 = AppHelper.convertStringToDateWithFormat(
+          b.date ?? '',
+          DateConstant.dateMMddYYYY,
+        );
+        return date2.compareTo(date1);
+      });
+
+      listKids.value = listKidsConfirm;
+    } catch (_) {}
+  }
+
+  //////////////////////////////////////////////////////////
+  /// Add Kid Confirm
+  //////////////////////////////////////////////////////////
+  void addKidConfirm(DateTime date) async {
+    try {
+      final uuid = (const Uuid().v4());
+      final user = FirebaseAuth.instance.currentUser;
+      final KidConfirmModel request = KidConfirmModel(
+        id: uuid,
+        date: AppHelper.convertDatetoStringWithFormat(
+          date,
+          DateConstant.dateMMddYYYY,
+        ),
+      );
+
+      /// Add New
+      await FirebaseFirestore.instance
+          .collection(CollectionConstant.user)
+          .doc(user?.uid ?? '')
+          .collection(CollectionConstant.kidConfirm)
+          .doc(uuid)
+          .set(request.toJson());
+
+      getKidConfirms();
+    } catch (_) {}
   }
 
   /// Init data
@@ -121,14 +183,7 @@ class KidController extends GetxController {
       builder: (context) {
         return ConfirmVisitPopup(
           confirmAction: () {
-            listKids.update((val) {
-              val?.add(
-                KidConfirmModel(
-                  date: AppHelper.convertDatetoStringWithFormat(
-                      date, DateConstant.dateMMddYYYY),
-                ),
-              );
-            });
+            addKidConfirm(date);
           },
         );
       },

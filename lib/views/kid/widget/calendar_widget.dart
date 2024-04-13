@@ -150,7 +150,9 @@ class CalendarWidget extends GetView<KidController> {
 
     return TapDebouncer(
       onTap: () async {
-        controller.confirmKidAction(context, item.datetime);
+        if (!isConfirm) {
+          controller.confirmKidAction(context, item.datetime);
+        }
       },
       builder: (context, onTap) => InkWell(
         onTap: onTap,
