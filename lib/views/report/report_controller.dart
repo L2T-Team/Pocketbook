@@ -122,7 +122,11 @@ class ReportController extends GetxController {
     final groupByCategory = groupBy(listFilter, (item) => item.category);
     groupByCategory.forEach((category, list) {
       category?.listTrans = list;
-      listCats.add(category!);
+      final fil =
+          listCats.where((element) => element.id == category?.id).toList();
+      if (fil.isEmpty) {
+        listCats.add(category!);
+      }
     });
     listCategories.value = listCats;
   }

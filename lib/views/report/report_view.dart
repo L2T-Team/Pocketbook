@@ -114,6 +114,17 @@ class ReportView extends GetWidget<ReportController> {
                                                 .listTransactions.value,
                                             currentDateTime:
                                                 controller.currentDate.value,
+                                            selectDateAction: (DateTime date) {
+                                              /// Selected Day
+                                              controller.currentDate.value =
+                                                  date;
+                                              controller.selectedTime.value =
+                                                  LanguageKey.day.tr;
+                                              controller
+                                                  .calculateCategoryTransaction(
+                                                      controller
+                                                          .totalTransactions);
+                                            },
                                           )
                                         : OverviewReportDayWidget(
                                             listTrans: controller
