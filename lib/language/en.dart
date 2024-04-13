@@ -37,6 +37,7 @@ class EnglishLanguage {
       LanguageKey.editTransaction: 'Edit transaction',
       LanguageKey.addNewTransaction: 'Add new transaction',
       LanguageKey.more: 'More',
+      LanguageKey.transactionName: 'Transaction name',
 
       // Report
       LanguageKey.day: 'Day',

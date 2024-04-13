@@ -37,6 +37,7 @@ class LanguageKey {
   static const editTransaction = 'edit_transaction';
   static const addNewTransaction = 'add_new_transaction';
   static const more = 'more';
+  static const transactionName = 'transaction_name';
 
   // Report
   static const day = 'day';
