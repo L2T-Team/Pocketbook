@@ -56,7 +56,7 @@ class PhotoPopup extends StatelessWidget {
                   child: Row(
                     children: [
                       /// Take Photo
-                      _buildPhoto(
+                     /* _buildPhoto(
                         context,
                         AppImages.icTakePhoto,
                         LanguageKey.takePhoto.tr,
@@ -71,7 +71,7 @@ class PhotoPopup extends StatelessWidget {
                             Get.back();
                           }
                         },
-                      ),
+                      ),*/
 
                       /// Choose Photo
                       _buildPhoto(
