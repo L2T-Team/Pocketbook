@@ -149,6 +149,8 @@ class EventConstant {
   static const String categoryEvent = 'category_event';
   static const String transactionEvent = 'transaction_event';
   static const String navigateHomeEvent = 'navigate_home_event';
+  static const String updateAvatarEvent = 'update_avatar_event';
+  
 }
 
 /// CollectionConstant
@@ -157,6 +159,8 @@ class CollectionConstant {
   static const String category = 'Category';
   static const String transaction = 'Transaction';
   static const String kidConfirm = 'Kid-Confirm';
+  static const String avatar = 'Avatar';
+  static const String username = 'User-Name';
 }
 
 /// AppConstant

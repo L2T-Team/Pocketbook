@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/utils/app_asset.dart';
 import 'package:pocketbook/utils/app_helper.dart';
@@ -11,11 +14,13 @@ class HomeHeaderWidget extends StatelessWidget {
   final double total;
   final double income;
   final double expense;
+  final String avatarUrl;
   const HomeHeaderWidget({
     super.key,
     required this.total,
     required this.income,
     required this.expense,
+    required this.avatarUrl,
   });
 
   @override
@@ -86,13 +91,30 @@ class HomeHeaderWidget extends StatelessWidget {
                         width: 40.0,
                         height: 40.0,
                         alignment: Alignment.center,
-                        child: Image.asset(
-                          AppImages.icAvatar,
-                          width: 40.0,
-                          height: 40.0,
-                          fit: BoxFit.cover,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: AppColor.grey1E2A3B,
                         ),
-                      )
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: (avatarUrl).isNotEmpty
+                              ? CachedNetworkImage(
+                                  imageUrl: (avatarUrl),
+                                  width: 40.0,
+                                  height: 40.0,
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) => SpinKitCircle(
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                )
+                              : Image.asset(
+                                  AppImages.icAvatar,
+                                  width: 40.0,
+                                  height: 40.0,
+                                  fit: BoxFit.cover,
+                                ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

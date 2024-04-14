@@ -121,7 +121,6 @@ class AddEditCategoryController extends GetxController {
 
       uploadTask.whenComplete(() async {
         imageUrl.value = await storageRef.getDownloadURL();
-        // AppConstant.imageBaseUrl + nameImage;
         isLoading(false);
         validateButtonAction();
       });
@@ -170,7 +169,7 @@ class AddEditCategoryController extends GetxController {
       isLoading(false);
     } catch (_) {
       isLoading(false);
-      AppHelper.showError(LanguageKey.somethingWentWrong.tr);
+      // AppHelper.showError(LanguageKey.somethingWentWrong.tr);
     }
   }
 }

@@ -24,39 +24,43 @@ class PhotoPopup extends StatelessWidget {
         onTap: () {
           Get.back();
         },
-        child: Column(
-          children: [
-            Expanded(
-              child: GestureDetector(
+        child: Container(
+          color: AppColor.black.withOpacity(0.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const SizedBox.shrink(),
+                ),
+              ),
+
+              /// Body
+              GestureDetector(
                 onTap: () {
                   Get.back();
                 },
-                child: const SizedBox.shrink(),
-              ),
-            ),
-
-            /// Body
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 24,
-                  horizontal: 10,
-                ),
-                decoration: const BoxDecoration(
-                  color: AppColor.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(24.0),
-                    topRight: Radius.circular(24.0),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 24,
+                    horizontal: 10,
                   ),
-                ),
-                child: SafeArea(
-                  top: false,
-                  bottom: true,
-                  child: Row(
-                    children: [
-                      /// Take Photo
-                     /* _buildPhoto(
+                  decoration: const BoxDecoration(
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24.0),
+                      topRight: Radius.circular(24.0),
+                    ),
+                  ),
+                  child: SafeArea(
+                    top: false,
+                    bottom: true,
+                    child: Row(
+                      children: [
+                        /// Take Photo
+                        /* _buildPhoto(
                         context,
                         AppImages.icTakePhoto,
                         LanguageKey.takePhoto.tr,
@@ -73,29 +77,30 @@ class PhotoPopup extends StatelessWidget {
                         },
                       ),*/
 
-                      /// Choose Photo
-                      _buildPhoto(
-                        context,
-                        AppImages.icLibrary,
-                        LanguageKey.chooseFromLibrary.tr,
-                        () async {
-                          final hasPermission =
-                              await AppHelper.handleGalleryPermission();
-                          if (!hasPermission) return;
-                          final result =
-                              await AppHelper.pickImage(ImageSource.gallery);
-                          if (result != null) {
-                            choosePhoto(result);
-                            Get.back();
-                          }
-                        },
-                      ),
-                    ],
+                        /// Choose Photo
+                        _buildPhoto(
+                          context,
+                          AppImages.icLibrary,
+                          LanguageKey.chooseFromLibrary.tr,
+                          () async {
+                            final hasPermission =
+                                await AppHelper.handleGalleryPermission();
+                            if (!hasPermission) return;
+                            final result =
+                                await AppHelper.pickImage(ImageSource.gallery);
+                            if (result != null) {
+                              choosePhoto(result);
+                              Get.back();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
