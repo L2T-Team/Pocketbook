@@ -1,13 +1,22 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/utils/app_asset.dart';
 import 'package:pocketbook/utils/app_style.dart';
+import 'package:get/get.dart';
 
 class AvatarHeaderWidget extends StatelessWidget {
   final String username;
+  final String avatarUrl;
+  final Function onTapAvatar;
+  final Function onTapUserName;
   const AvatarHeaderWidget({
     super.key,
     required this.username,
+    required this.avatarUrl,
+    required this.onTapAvatar,
+    required this.onTapUserName,
   });
 
   @override
@@ -33,14 +42,27 @@ class AvatarHeaderWidget extends StatelessWidget {
                 height: 42,
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.center,
-                child: Text(
-                  username,
-                  textAlign: TextAlign.center,
-                  style: TextStyles.mediumTextStyle(
-                    size: 18.0,
-                    color: AppColor.white,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    minimumSize: Size.zero,
+                    padding: EdgeInsets.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
-                  maxLines: 1,
+                  onPressed: () {
+                    onTapUserName();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    child: Text(
+                      username.isEmpty ? LanguageKey.name.tr : username,
+                      textAlign: TextAlign.center,
+                      style: TextStyles.mediumTextStyle(
+                        size: 18.0,
+                        color: AppColor.white,
+                      ),
+                      maxLines: 1,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -60,11 +82,34 @@ class AvatarHeaderWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(44.0),
               color: AppColor.grey1E2A3B,
             ),
-            child: Image.asset(
-              AppImages.icAvatar,
-              width: 88.0,
-              height: 88.0,
-              fit: BoxFit.cover,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                minimumSize: Size.zero,
+                padding: EdgeInsets.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              onPressed: () {
+                onTapAvatar();
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(44.0),
+                child: (avatarUrl).isNotEmpty
+                    ? CachedNetworkImage(
+                        imageUrl: (avatarUrl),
+                        width: 88.0,
+                        height: 88.0,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => SpinKitCircle(
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                      )
+                    : Image.asset(
+                        AppImages.icAvatar,
+                        width: 88.0,
+                        height: 88.0,
+                        fit: BoxFit.cover,
+                      ),
+              ),
             ),
           ),
         ),

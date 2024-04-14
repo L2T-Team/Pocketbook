@@ -50,6 +50,8 @@ class DetailCategoryView extends GetWidget<DetailCategoryController> {
                                           '')
                                       .isNotEmpty
                                   ? CachedNetworkImage(
+                                      width: 80.0,
+                                      height: 80.0,
                                       imageUrl: (controller
                                               .categoryDetail.value?.image ??
                                           ''),

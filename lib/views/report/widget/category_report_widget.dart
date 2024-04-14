@@ -1,8 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/model/responses/category_model.dart';
 import 'package:pocketbook/model/responses/transaction_model.dart';
-import 'package:pocketbook/utils/app_asset.dart';
 import 'package:pocketbook/utils/app_helper.dart';
 import 'package:pocketbook/utils/app_style.dart';
 import 'package:get/get.dart';
@@ -87,11 +88,24 @@ class CategoryReportWidget extends StatelessWidget {
                           width: 40.0,
                           height: 40.0,
                           alignment: Alignment.center,
-                          child: Image.asset(
-                            AppImages.icAvatar,
-                            width: 40.0,
-                            height: 40.0,
-                            fit: BoxFit.cover,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: AppColor.grey201913.withOpacity(0.5),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: (category.image ?? '').isNotEmpty
+                                ? CachedNetworkImage(
+                                    imageUrl: (category.image ?? ''),
+                                    fit: BoxFit.cover,
+                                    width: 40.0,
+                                    height: 40.0,
+                                    placeholder: (context, url) =>
+                                        SpinKitCircle(
+                                      color: Colors.black.withOpacity(0.5),
+                                    ),
+                                  )
+                                : const SizedBox(),
                           ),
                         ),
 

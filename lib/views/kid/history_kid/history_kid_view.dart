@@ -32,7 +32,6 @@ class HistoryKidView extends GetWidget<HistoryKidController> {
                     Obx(
                       () => HistoryYearWidget(
                         listKids: controller.listKids.value,
-                        year: 2024,
                       ),
                     ),
                   ],

@@ -57,7 +57,8 @@ class AddEditTransactionController extends GetxController {
       );
       controllerName.text = transactionDetail.value?.name ?? '';
       controllerAmount.text =
-          (transactionDetail.value?.amount ?? 0).toStringAsFixed(2);
+          ((transactionDetail.value?.amount ?? 0).toStringAsFixed(2))
+              .replaceAll('.00', '');
       validateButtonAction();
     }
 
@@ -114,7 +115,11 @@ class AddEditTransactionController extends GetxController {
 
       /// Detail Category
       if (listCats.isNotEmpty && categorySelected.value == null) {
-        categorySelected.value = listCats.first;
+        final listExpense = listCats
+            .where((element) => element.type == LanguageKey.expense.tr)
+            .toList();
+        categorySelected.value =
+            listExpense.isNotEmpty ? listExpense.first : listCats.first;
       }
 
       /// Add More Category Button
@@ -177,6 +182,9 @@ class AddEditTransactionController extends GetxController {
             .collection(CollectionConstant.transaction)
             .doc(uuid)
             .set(request.toJson());
+
+        /// Navigate Home
+        eventBus.fire(EventConstant.navigateHomeEvent);
       } else {
         /// Edit
         await FirebaseFirestore.instance

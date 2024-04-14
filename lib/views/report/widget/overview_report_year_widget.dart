@@ -10,10 +10,12 @@ import 'package:pocketbook/views/report/widget/overview_income_expense_widget.da
 class OverviewReportYearWidget extends StatelessWidget {
   final List<TransactionModel> listTrans;
   final DateTime currentDateTime;
+  final Function(DateTime) selectDateAction;
   const OverviewReportYearWidget({
     super.key,
     required this.listTrans,
     required this.currentDateTime,
+    required this.selectDateAction,
   });
 
   @override
@@ -104,7 +106,9 @@ class OverviewReportYearWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    selectDateAction(date);
+                  },
                   child: SizedBox(
                     height: 48.0,
                     child: Row(

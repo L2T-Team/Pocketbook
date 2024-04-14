@@ -106,6 +106,17 @@ class ReportView extends GetWidget<ReportController> {
                                             controller.listTransactions.value,
                                         currentDateTime:
                                             controller.currentDate.value,
+                                        selectDateAction: (DateTime date) {
+                                          /// Selected Month
+                                              controller.currentDate.value =
+                                                  date;
+                                              controller.selectedTime.value =
+                                                  LanguageKey.month.tr;
+                                              controller
+                                                  .calculateCategoryTransaction(
+                                                      controller
+                                                          .totalTransactions);
+                                        },
                                       )
                                     : (controller.selectedTime.value ==
                                             LanguageKey.month.tr
@@ -114,6 +125,17 @@ class ReportView extends GetWidget<ReportController> {
                                                 .listTransactions.value,
                                             currentDateTime:
                                                 controller.currentDate.value,
+                                            selectDateAction: (DateTime date) {
+                                              /// Selected Day
+                                              controller.currentDate.value =
+                                                  date;
+                                              controller.selectedTime.value =
+                                                  LanguageKey.day.tr;
+                                              controller
+                                                  .calculateCategoryTransaction(
+                                                      controller
+                                                          .totalTransactions);
+                                            },
                                           )
                                         : OverviewReportDayWidget(
                                             listTrans: controller

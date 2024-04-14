@@ -183,18 +183,18 @@ class AppHelper {
   /// Format Number
   static String formatNumber(double value) {
     String format = '';
-    if (value < 1000) {
+    if (value.abs() < 1000) {
       format = '##0.##';
-    } else if (value < 1000000) {
+    } else if (value.abs() < 1000000) {
       format = '##0,000.##';
-    } else if (value < 1000000000) {
+    } else if (value.abs() < 1000000000) {
       format = '##0,000,000.##';
-    } else if (value < 1000000000000) {
+    } else if (value.abs() < 1000000000000) {
       format = '##0,000,000,000.##';
     } else {
       format = '##0,000,000,000,000.##';
     }
-    final formatter = NumberFormat(format).format(value);
+    final formatter = NumberFormat(format).format(value.abs());
     return formatter;
   }
 

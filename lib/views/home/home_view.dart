@@ -24,6 +24,7 @@ class HomeView extends GetWidget<HomeController> {
                   total: controller.total.value,
                   income: controller.income.value,
                   expense: controller.expense.value,
+                  avatarUrl: controller.avatarUrl.value
                 ),
               ),
 

@@ -113,7 +113,7 @@ class AddEditCategoryController extends GetxController {
       // );
 
       /// Upload
-      final path = file.path;
+      // final path = file.path;
       final nameImage = '${const Uuid().v4()}.jpg';
       final metadata = SettableMetadata(contentType: "image/jpeg");
       final storageRef = FirebaseStorage.instance.ref().child(nameImage);
@@ -169,7 +169,7 @@ class AddEditCategoryController extends GetxController {
       isLoading(false);
     } catch (_) {
       isLoading(false);
-      AppHelper.showError(LanguageKey.somethingWentWrong.tr);
+      // AppHelper.showError(LanguageKey.somethingWentWrong.tr);
     }
   }
 }

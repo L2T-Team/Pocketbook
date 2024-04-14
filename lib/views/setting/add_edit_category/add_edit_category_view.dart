@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -63,9 +62,9 @@ class AddEditCategoryView extends GetWidget<AddEditCategoryController> {
                               () => controller.imageUrl.value.isNotEmpty
                                   ? CachedNetworkImage(
                                       imageUrl: controller.imageUrl.value,
-                                      fit: BoxFit.cover,
                                       width: 80.0,
                                       height: 80.0,
+                                      fit: BoxFit.cover,
                                       placeholder: (context, url) =>
                                           SpinKitCircle(
                                         color: Colors.black.withOpacity(0.5),

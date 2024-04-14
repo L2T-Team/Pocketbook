@@ -122,7 +122,7 @@ class AddEditTransactionView extends GetWidget<AddEditTransactionController> {
                             titleLabel: LanguageKey.name.tr,
                             focusNode: controller.focusNodeName,
                             controller: controller.controllerName,
-                            hintText: LanguageKey.username.tr,
+                            hintText: LanguageKey.transactionName.tr,
                             onChange: (String text) {
                               controller.validateButtonAction();
                             },

@@ -10,10 +10,12 @@ import 'package:pocketbook/views/report/widget/overview_income_expense_widget.da
 class OverviewReportMonthWidget extends StatelessWidget {
   final List<TransactionModel> listTrans;
   final DateTime currentDateTime;
+  final Function(DateTime) selectDateAction;
   const OverviewReportMonthWidget({
     super.key,
     required this.listTrans,
     required this.currentDateTime,
+    required this.selectDateAction,
   });
 
   @override
@@ -33,7 +35,7 @@ class OverviewReportMonthWidget extends StatelessWidget {
           element.date ?? '',
           DateConstant.dateMMddYYYY,
         );
-        return dateShow.month == i;
+        return dateShow.day == i;
       }).toList();
       listOverrides.add(GroupTransactionModel(
         date: '${currentDateTime.month}/$i/${currentDateTime.year}',
@@ -105,7 +107,9 @@ class OverviewReportMonthWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    selectDateAction(date);
+                  },
                   child: SizedBox(
                     height: 48.0,
                     child: Row(

@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/utils/app_asset.dart';
+import 'package:pocketbook/utils/app_helper.dart';
 import 'package:pocketbook/utils/app_style.dart';
 import 'package:pocketbook/views/setting/setting_controller.dart';
 import 'package:pocketbook/views/setting/widget/avatar_header_widget.dart';
@@ -16,33 +16,54 @@ class SettingView extends GetWidget<SettingController> {
       resizeToAvoidBottomInset: false,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Column(
+        child: Stack(
           children: [
-            /// Header
-            const AvatarHeaderWidget(username: 'Lam Le',),
-            /// Body
-            Expanded(
-              child: Column(
-                children: [
-                  const SizedBox(height: 16),
-                  _buildButton(
-                    context,
-                    LanguageKey.category.tr,
-                    AppImages.icCategory,
-                    () {
-                      controller.navigateCategory();
+            Column(
+              children: [
+                /// Header
+                Obx(
+                  () => AvatarHeaderWidget(
+                    username: controller.username.value,
+                    avatarUrl: controller.avatarUrl.value,
+                    onTapAvatar: () {
+                      controller.photoAction(context);
+                    },
+                    onTapUserName: () {
+                      controller.editUserNameAction(context);
                     },
                   ),
-                  _buildButton(
-                    context,
-                    LanguageKey.logOut.tr,
-                    AppImages.icLogOut,
-                    () {
-                      controller.logOutAction(context);
-                    },
+                ),
+
+                /// Body
+                Expanded(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 16),
+                      _buildButton(
+                        context,
+                        LanguageKey.category.tr,
+                        AppImages.icCategory,
+                        () {
+                          controller.navigateCategory();
+                        },
+                      ),
+                      _buildButton(
+                        context,
+                        LanguageKey.logOut.tr,
+                        AppImages.icLogOut,
+                        () {
+                          controller.logOutAction(context);
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
+
+            /// Loading
+            Obx(
+              () => AppHelper.buildLoading(controller.isLoading.value),
             ),
           ],
         ),

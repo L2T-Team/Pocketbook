@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/model/responses/transaction_model.dart';
+import 'package:pocketbook/model/responses/user_model.dart';
 import 'package:pocketbook/my_app.dart';
 import 'package:pocketbook/utils/app_constant.dart';
 import 'package:pocketbook/utils/app_routes.dart';
@@ -28,15 +29,19 @@ class HomeController extends GetxController {
   final Rx<List<TransactionModel>> listTransactions =
       Rx<List<TransactionModel>>([]);
   StreamSubscription? subscription;
+  final Rx<String> avatarUrl = Rx<String>('');
 
   /// Init
   @override
   void onInit() {
     super.onInit();
     getTransactions();
+    getAvatar();
     subscription = eventBus.on().listen((event) {
       if (event == EventConstant.transactionEvent) {
         getTransactions();
+      } else if (event == EventConstant.updateAvatarEvent) {
+        getAvatar();
       }
     });
   }
@@ -45,6 +50,25 @@ class HomeController extends GetxController {
   void dispose() {
     super.dispose();
     subscription?.cancel();
+  }
+
+  //////////////////////////////////////////////////////////
+  /// Get Avatar
+  //////////////////////////////////////////////////////////
+  void getAvatar() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      final itemFirebase = (await FirebaseFirestore.instance
+          .collection(CollectionConstant.user)
+          .doc(user?.uid ?? '')
+          .collection(CollectionConstant.avatar)
+          .doc(user?.uid ?? '')
+          .get());
+      final AvatarModel avatarF = AvatarModel.fromJson(itemFirebase);
+      if ((avatarF.avatar ?? '').isNotEmpty) {
+        avatarUrl.value = avatarF.avatar ?? '';
+      }
+    } catch (_) {}
   }
 
   //////////////////////////////////////////////////////////
@@ -83,7 +107,7 @@ class HomeController extends GetxController {
       }
       income.value = incomeValue;
       expense.value = expenseValue;
-      total.value = income.value + expense.value;
+      total.value = income.value - expense.value;
     } catch (_) {}
   }
 
