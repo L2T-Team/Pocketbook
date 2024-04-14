@@ -124,8 +124,8 @@ class AppHelper {
 
   /// Photo permission
   static Future<bool> handleGalleryPermission() async {
-    await Permission.photos.request();
-    var statusPermissionGallery = await Permission.photos.status;
+    await Permission.storage.request();
+    var statusPermissionGallery = await Permission.storage.status;
     if (statusPermissionGallery.isGranted) {
       return true;
     }

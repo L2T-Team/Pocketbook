@@ -53,10 +53,10 @@ android {
 
     signingConfigs {
         debug {
-            keyAlias 'petty'
-            keyPassword 'Petty2024'
-            storeFile file("keystores/keystore-debug.jks")
-            storePassword 'Petty2024'
+//            keyAlias 'petty'
+//            keyPassword 'Petty2024'
+//            storeFile file("keystores/keystore-debug.jks")
+//            storePassword 'Petty2024'
         }
 
         release {
