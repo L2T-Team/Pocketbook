@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -124,12 +125,25 @@ class AppHelper {
 
   /// Photo permission
   static Future<bool> handleGalleryPermission() async {
-    await Permission.photos.request();
-    var statusPermissionGallery = await Permission.photos.status;
-    if (statusPermissionGallery.isGranted) {
+    PermissionStatus? statusPermissionGallery;
+    if (Platform.isAndroid) {
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
+      if (androidInfo.version.sdkInt <= 32) {
+        await Permission.storage.request();
+        statusPermissionGallery = await Permission.storage.status;
+      } else {
+        await Permission.photos.request();
+        statusPermissionGallery = await Permission.photos.status;
+      }
+    } else if (Platform.isIOS) {
+      await Permission.photos.request();
+      statusPermissionGallery = await Permission.photos.status;
+    }
+
+    if (statusPermissionGallery?.isGranted == true) {
       return true;
     }
-    if (!statusPermissionGallery.isGranted) {
+    if (!(statusPermissionGallery?.isGranted ?? false)) {
       AppHelper.showDialogPermission(
         title: LanguageKey.requestPermission.tr,
         message: LanguageKey.requestPhotoPermission.tr,
@@ -249,10 +263,8 @@ class AppHelper {
     DateTime date1,
     DateTime date2,
   ) {
-    return date1.year == date2.year &&
-        date1.month == date2.month;
+    return date1.year == date2.year && date1.month == date2.month;
   }
-
 
   /// Get days in month
   static int daysInMonth(DateTime date) {

@@ -195,11 +195,8 @@ class SettingController extends GetxController {
         cropStyle: CropStyle.circle,
         uiSettings: [
           AndroidUiSettings(
-              toolbarTitle: '',
-              toolbarColor: Colors.deepOrange,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
+            toolbarTitle: '',
+          ),
           IOSUiSettings(
             title: '',
           ),

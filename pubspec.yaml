@@ -37,6 +37,7 @@ dependencies:
   firebase_storage: any
   uuid: any
   event_bus: any
+  device_info_plus: 9.1.2
 
 # dev_dependencies
 dev_dependencies:
