@@ -71,7 +71,7 @@ class LoginController extends GetxController {
       Get.offAllNamed(RoutesName.main);
     } on FirebaseAuthException catch (e) {
       isLoading(false);
-      if (e.code == 'user-not-found') {
+      if (e.code == 'user-not-found' || e.code == 'invalid-credential') {
         AppHelper.showError(LanguageKey.noUserFound.tr);
       }
       if (e.code == 'wrong-password') {
