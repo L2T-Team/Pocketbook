@@ -89,6 +89,12 @@ class AddEditCategoryController extends GetxController {
   /// Crop Circle Image
   void cropCircleImage(BuildContext context, XFile file) async {
     isLoading(true);
+    /// Check Image Over 10 MB
+    if (await AppHelper.checkSizeImageOver10Mb(file.path)) {
+      isLoading(false);
+      AppHelper.showError(LanguageKey.errorOverImage10Mb.tr);
+      return;
+    }
     try {
       // CroppedFile? croppedFile = await ImageCropper().cropImage(
       //   sourcePath: file.path,
@@ -120,6 +126,14 @@ class AddEditCategoryController extends GetxController {
       final uploadTask = storageRef.putData(await file.readAsBytes(), metadata);
 
       uploadTask.whenComplete(() async {
+        /// Delete Url
+        if (imageUrl.value.isNotEmpty) {
+          try {
+            Reference photoRef =
+                FirebaseStorage.instance.refFromURL(imageUrl.value);
+            await photoRef.delete().then((value) {});
+          } catch (_) {}
+        }
         imageUrl.value = await storageRef.getDownloadURL();
         isLoading(false);
         validateButtonAction();

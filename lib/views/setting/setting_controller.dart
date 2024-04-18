@@ -186,6 +186,11 @@ class SettingController extends GetxController {
 
   /// Crop Circle Image
   void cropCircleImage(BuildContext context, XFile file) async {
+    /// Check Image Over 10 MB
+    if (await AppHelper.checkSizeImageOver10Mb(file.path)) {
+      AppHelper.showError(LanguageKey.errorOverImage10Mb.tr);
+      return;
+    }
     try {
       // CroppedFile? croppedFile = await ImageCropper().cropImage(
       //   sourcePath: file.path,
@@ -218,6 +223,14 @@ class SettingController extends GetxController {
       final uploadTask = storageRef.putData(await file.readAsBytes(), metadata);
 
       uploadTask.whenComplete(() async {
+        /// Delete Url
+        if (avatarUrl.value.isNotEmpty) {
+          try {
+            Reference photoRef =
+                FirebaseStorage.instance.refFromURL(avatarUrl.value);
+            await photoRef.delete().then((value) {});
+          } catch (_) {}
+        }
         avatarUrl.value = await storageRef.getDownloadURL();
         final user = FirebaseAuth.instance.currentUser;
         final AvatarModel request = AvatarModel(

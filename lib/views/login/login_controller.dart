@@ -74,7 +74,7 @@ class LoginController extends GetxController {
       if (e.code == 'user-not-found' || e.code == 'invalid-credential') {
         AppHelper.showError(LanguageKey.noUserFound.tr);
       }
-      if (e.code == 'wrong-password') {
+      if (e.code == 'wrong-password' || e.code == 'invalid-credential') {
         AppHelper.showError(LanguageKey.wrongPassword.tr);
       }
     } catch (e) {

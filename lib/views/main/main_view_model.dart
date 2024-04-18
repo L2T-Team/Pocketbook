@@ -19,8 +19,10 @@ class MainViewModel extends GetxController {
   void onInit() {
     super.onInit();
     subscription = eventBus.on().listen((event) {
-      if (event == EventConstant.transactionEvent) {
+      if (event == EventConstant.navigateHomeEvent) {
         changeInsexScreen(0);
+      } else if (event == EventConstant.navigateMeEvent) {
+        changeInsexScreen(4);
       }
     });
   }

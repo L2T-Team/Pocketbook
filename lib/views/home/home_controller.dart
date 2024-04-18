@@ -9,6 +9,7 @@ import 'package:pocketbook/model/responses/transaction_model.dart';
 import 'package:pocketbook/model/responses/user_model.dart';
 import 'package:pocketbook/my_app.dart';
 import 'package:pocketbook/utils/app_constant.dart';
+import 'package:pocketbook/utils/app_helper.dart';
 import 'package:pocketbook/utils/app_routes.dart';
 import 'package:pocketbook/views/home/detail_transaction/widget/delete_transaction_popup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,7 +78,7 @@ class HomeController extends GetxController {
   void getTransactions() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
-      final List<TransactionModel> listTrans = [];
+      List<TransactionModel> listTrans = [];
       final listFirebase = (await FirebaseFirestore.instance
               .collection(CollectionConstant.user)
               .doc(user?.uid ?? '')
@@ -88,6 +89,17 @@ class HomeController extends GetxController {
       for (var it in listFirebase) {
         listTrans.add(TransactionModel.fromJson(it));
       }
+
+      /// Same Month Condition
+      listTrans = listTrans.where((element) {
+        final dateShow = AppHelper.convertStringToDateWithFormat(
+          element.date ?? '',
+          DateConstant.dateMMddYYYY,
+        );
+        return AppHelper.checkTheSameMonth(dateShow, DateTime.now());
+      }).toList();
+
+      /// Apply List
       listTransactions.value = listTrans;
 
       /// Amount

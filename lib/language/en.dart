@@ -4,12 +4,15 @@ class EnglishLanguage {
   Map<String, String> generateLanguage() {
     return {
       // Login
+      LanguageKey.errorOverImage10Mb:
+          'The image size exceeds 10MB\nUnable to upload\nPlease upload under 10MB',
       LanguageKey.login: 'Login',
       LanguageKey.username: 'Username',
       LanguageKey.password: 'Password',
       LanguageKey.welcomeBack: 'Welcome back',
       LanguageKey.noUserFound: 'No user found for that email.',
-      LanguageKey.wrongPassword: 'Wrong password.',
+      LanguageKey.wrongPassword:
+          'You have entered an invalid username or password',
       LanguageKey.yes: 'Yes',
       LanguageKey.no: 'No',
       LanguageKey.ok: 'OK',
@@ -78,6 +81,9 @@ class EnglishLanguage {
       LanguageKey.deleteCategory: 'Delete category',
       LanguageKey.deleteCategoryDescription:
           'Are you sure you want to delete\nthis category?',
+      LanguageKey.deleteKidDay: 'Delete kid day',
+      LanguageKey.deleteKidDayDescription:
+          'Are you sure you want to delete\nthis kid day?',
       LanguageKey.editNewCategory: 'Edit new category',
       LanguageKey.updatePhoto: 'Update photo',
       LanguageKey.addNewCategory: 'Add new category',

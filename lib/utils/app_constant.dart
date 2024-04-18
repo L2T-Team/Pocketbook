@@ -149,6 +149,7 @@ class EventConstant {
   static const String categoryEvent = 'category_event';
   static const String transactionEvent = 'transaction_event';
   static const String navigateHomeEvent = 'navigate_home_event';
+  static const String navigateMeEvent = 'navigate_me_event';
   static const String updateAvatarEvent = 'update_avatar_event';
   
 }

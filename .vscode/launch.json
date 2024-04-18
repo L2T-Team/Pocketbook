@@ -9,6 +9,8 @@
                 "d",
                 "--web-browser-flag",
                 "--disable-web-security",
+                "--web-port",
+                "5001",
                 "--web-renderer",
                 "canvaskit"
             ]
@@ -23,6 +25,8 @@
                 "d",
                 "--web-browser-flag",
                 "--disable-web-security",
+                "--web-port",
+                "5001",
                 "--web-renderer",
                 "canvaskit"
             ]
@@ -36,7 +40,11 @@
             "args": [
                 "d",
                 "--web-browser-flag",
-                "--disable-web-security"
+                "--disable-web-security",
+                "--web-port",
+                "5001",
+                "--web-renderer",
+                "canvaskit"
             ]
         }
     ]

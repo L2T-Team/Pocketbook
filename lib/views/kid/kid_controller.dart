@@ -8,6 +8,7 @@ import 'package:pocketbook/utils/app_constant.dart';
 import 'package:pocketbook/utils/app_helper.dart';
 import 'package:pocketbook/utils/app_routes.dart';
 import 'package:pocketbook/views/kid/widget/confirm_visit_popup.dart';
+import 'package:pocketbook/views/kid/widget/delete_kid_day_popup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pocketbook/repos/auth_repo.dart';
 import 'package:uuid/uuid.dart';
@@ -56,6 +57,7 @@ class KidController extends GetxController {
       for (var it in listFirebase) {
         listKidsConfirm.add(KidConfirmModel.fromJson(it));
       }
+
       /// Sort
       listKidsConfirm.sort((a, b) {
         final date1 = AppHelper.convertStringToDateWithFormat(
@@ -196,5 +198,37 @@ class KidController extends GetxController {
       RoutesName.historyKid,
       arguments: listKids.value,
     );
+  }
+
+  /// Delete Kid Day
+  void deleteKidDayAction(BuildContext context, KidConfirmModel kidDay) {
+    showDialog(
+      context: context,
+      useSafeArea: false,
+      builder: (context) {
+        return DeleteKidDayPopup(
+          deleteAction: () {
+            deleteKidDay(kidDay);
+          },
+        );
+      },
+    );
+  }
+
+  //////////////////////////////////////////////////////////
+  /// Delete Kid Day
+  //////////////////////////////////////////////////////////
+  void deleteKidDay(KidConfirmModel kidDay) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      (await FirebaseFirestore.instance
+          .collection(CollectionConstant.user)
+          .doc(user?.uid ?? '')
+          .collection(CollectionConstant.kidConfirm)
+          .doc(kidDay.id ?? '')
+          .delete());
+      getKidConfirms();
+      Get.back();
+    } catch (_) {}
   }
 }

@@ -17,7 +17,7 @@ class TransactionModel {
   TransactionModel.fromJson(dynamic json) {
     id = json['id'] ?? '';
     name = json['name'] ?? '';
-    amount = json['amount'] ?? 0;
+    amount =  double.tryParse((json['amount'] ?? 0).toString());
     category = json['category'] != null
         ? CategoryModel.fromJson(json['category'])
         : null;

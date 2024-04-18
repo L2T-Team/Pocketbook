@@ -1,7 +1,7 @@
 name: pocketbook
 description: "Petty is a dating app where in order to find true love you have to be Petty"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+6
+version: 1.0.0+7
 
 environment:
   sdk: '>=3.3.1 <4.0.0'
@@ -37,6 +37,8 @@ dependencies:
   firebase_storage: any
   uuid: any
   event_bus: any
+  device_info_plus: 9.1.2
+  flutter_web_frame: any
 
 # dev_dependencies
 dev_dependencies:
