@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pocketbook/language/language.dart';
+import 'package:pocketbook/my_app.dart';
 import 'package:pocketbook/utils/app_asset.dart';
+import 'package:pocketbook/utils/app_constant.dart';
 import 'package:pocketbook/utils/app_helper.dart';
 import 'package:pocketbook/utils/app_style.dart';
 import 'package:get/get.dart';
@@ -95,24 +95,38 @@ class HomeHeaderWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20.0),
                           color: AppColor.grey1E2A3B,
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: (avatarUrl).isNotEmpty
-                              ? CachedNetworkImage(
-                                  imageUrl: (avatarUrl),
-                                  width: 40.0,
-                                  height: 40.0,
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) => SpinKitCircle(
-                                    color: Colors.black.withOpacity(0.5),
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            minimumSize: Size.zero,
+                            padding: EdgeInsets.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                          ),
+                          onPressed: () {
+                            eventBus.fire(EventConstant.navigateMeEvent);
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: (avatarUrl).isNotEmpty
+                                ? CachedNetworkImage(
+                                    imageUrl: (avatarUrl),
+                                    width: 40.0,
+                                    height: 40.0,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) =>
+                                        SpinKitCircle(
+                                      color: Colors.black.withOpacity(0.5),
+                                    ),
+                                  )
+                                : Image.asset(
+                                    AppImages.icAvatar,
+                                    width: 40.0,
+                                    height: 40.0,
+                                    fit: BoxFit.cover,
                                   ),
-                                )
-                              : Image.asset(
-                                  AppImages.icAvatar,
-                                  width: 40.0,
-                                  height: 40.0,
-                                  fit: BoxFit.cover,
-                                ),
+                          ),
                         ),
                       ),
                     ],

@@ -89,6 +89,12 @@ class AddEditCategoryController extends GetxController {
   /// Crop Circle Image
   void cropCircleImage(BuildContext context, XFile file) async {
     isLoading(true);
+    /// Check Image Over 10 MB
+    if (await AppHelper.checkSizeImageOver10Mb(file.path)) {
+      isLoading(false);
+      AppHelper.showError(LanguageKey.errorOverImage10Mb.tr);
+      return;
+    }
     try {
       CroppedFile? croppedFile = await ImageCropper().cropImage(
         sourcePath: file.path,
@@ -107,6 +113,7 @@ class AddEditCategoryController extends GetxController {
             title: '',
           ),
           WebUiSettings(
+            // ignore: use_build_context_synchronously
             context: context,
           ),
         ],
@@ -120,6 +127,14 @@ class AddEditCategoryController extends GetxController {
       final uploadTask = storageRef.putFile(File(path), metadata);
 
       uploadTask.whenComplete(() async {
+        /// Delete Url
+        if (imageUrl.value.isNotEmpty) {
+          try {
+            Reference photoRef =
+                FirebaseStorage.instance.refFromURL(imageUrl.value);
+            await photoRef.delete().then((value) {});
+          } catch (_) {}
+        }
         imageUrl.value = await storageRef.getDownloadURL();
         isLoading(false);
         validateButtonAction();

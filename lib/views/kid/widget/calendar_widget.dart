@@ -152,6 +152,8 @@ class CalendarWidget extends GetView<KidController> {
       onTap: () async {
         if (!isConfirm) {
           controller.confirmKidAction(context, item.datetime);
+        } else {
+          controller.deleteKidDayAction(context, filter.first);
         }
       },
       builder: (context, onTap) => InkWell(

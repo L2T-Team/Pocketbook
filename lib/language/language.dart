@@ -5,6 +5,7 @@ import 'package:pocketbook/utils/app_constant.dart';
 class LanguageKey {
   /// Common
   static const error = 'error';
+  static const errorOverImage10Mb = 'errorOverImage10Mb';
 
   // Login
   static const login = 'login';
@@ -77,6 +78,8 @@ class LanguageKey {
   static const edit = 'edit';
   static const deleteCategory = 'delete_category';
   static const deleteCategoryDescription = 'delete_category_description';
+  static const deleteKidDay = 'delete_kid_day';
+  static const deleteKidDayDescription = 'delete_kid_day_description';
   static const editNewCategory = 'edit_new_category';
   static const updatePhoto = 'update_photo';
   static const addNewCategory = 'add_new_category';

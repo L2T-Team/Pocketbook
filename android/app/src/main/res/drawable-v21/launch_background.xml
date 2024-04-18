@@ -9,4 +9,7 @@
             android:gravity="center"
             android:src="@mipmap/logo" />
     </item> -->
+     <item>
+        <bitmap android:gravity="fill" android:src="@drawable/bg" />
+    </item>
 </layer-list>

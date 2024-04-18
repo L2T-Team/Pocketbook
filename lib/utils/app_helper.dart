@@ -273,4 +273,13 @@ class AppHelper {
         firstDayThisMonth.month + 1, firstDayThisMonth.day);
     return firstDayNextMonth.difference(firstDayThisMonth).inDays;
   }
+
+  /// Check Size Over 10MB
+  static Future<bool> checkSizeImageOver10Mb(String path) async {
+    int fileSize = await AppHelper.checkFilePath(path);
+    if (fileSize >= UnitConstant.mbToMibBytes * 10) {
+      return true;
+    }
+    return false;
+  }
 }
