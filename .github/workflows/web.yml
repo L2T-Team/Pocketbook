@@ -2,7 +2,7 @@ name: Gh-Pages-Flutter
 
 on:
   push:
-    branches: [ gh-pages ]
+    branches: [ feature/flutter-web ]
 
 jobs:
   build:
@@ -17,6 +17,3 @@ jobs:
         with:
           baseHref: /Pocketbook/
           webRenderer: canvaskit
-          targetBranch: feature/flutter-web
-
-
