@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pocketbook/language/cn.dart';
 import 'package:pocketbook/language/en.dart';
 import 'package:pocketbook/utils/app_constant.dart';
 
@@ -157,6 +158,6 @@ class LanguageKey {
 class Language extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
-        LocaleKey.en: EnglishLanguage().generateLanguage(),
+        LocaleKey.en: ChineseLanguage().generateLanguage(),
       };
 }

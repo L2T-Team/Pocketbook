@@ -1,5 +1,5 @@
 class AppImages {
-  static const String icBg = 'assets/images/bg.png';
+  static const String icBg = 'assets/images/bg.jpg';
   static const String icEyeNot = 'assets/images/eye-not.png';
   static const String icEyeSee = 'assets/images/eye-see.png';
   /// Bottom Bar
