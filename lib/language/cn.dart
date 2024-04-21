@@ -7,7 +7,7 @@ class ChineseLanguage {
       LanguageKey.errorOverImage10Mb:
           'The image size exceeds 10MB\nUnable to upload\nPlease upload under 10MB',
       LanguageKey.login: '登录',
-      LanguageKey.username: 'Username',
+      LanguageKey.username: '用户名',
       LanguageKey.password: 'Password',
       LanguageKey.welcomeBack: 'Welcome back',
       LanguageKey.noUserFound: 'No user found for that email.',
