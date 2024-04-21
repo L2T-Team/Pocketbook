@@ -1,12 +1,14 @@
-name: Gh-Pages
+name: Gh-Pages-Flutter
 
 on:
   push:
-    branches: [ main ]
+    branches: [ feature/flutter-web ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
