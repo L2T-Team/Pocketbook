@@ -16,4 +16,5 @@ jobs:
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
           baseHref: /Pocketbook/
+          webRenderer: canvaskit
 
