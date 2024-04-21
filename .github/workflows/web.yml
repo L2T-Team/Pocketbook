@@ -17,4 +17,6 @@ jobs:
         with:
           baseHref: /Pocketbook/
           webRenderer: canvaskit
+          targetBranch: feature/flutter-web
+
 
