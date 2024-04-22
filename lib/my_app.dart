@@ -59,6 +59,7 @@ Future<void> runMyApp({
 
   runApp(
     GetMaterialApp(
+      title: '今天也要存钱鸭',
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
