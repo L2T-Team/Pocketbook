@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:pocketbook/language/cn.dart';
-import 'package:pocketbook/language/en.dart';
 import 'package:pocketbook/utils/app_constant.dart';
 
 class LanguageKey {
