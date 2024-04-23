@@ -15,17 +15,18 @@ class LanguageKey {
   static const noUserFound = 'noUserFound';
   static const wrongPassword = 'wrong_password';
   static const yes = 'Yes';
+  static const yesDelete = 'yesDelete';
   static const no = 'No';
   static const ok = 'OK';
   static const requestPermission = 'request_permission';
-  static const requestCameraPermission = 'request_camera_permissiom';
+  static const requestCameraPermission = 'request_camera_permission';
   static const requestPhotoPermission = 'request_photo_permission';
 
   // Bottom bar
-  static const home = 'home';
-  static const report = 'report';
-  static const kid = 'kid';
-  static const setting = 'setting';
+  static const homeNav = 'homeNav';
+  static const reportNav = 'reportNav';
+  static const kidNav = 'kidNav';
+  static const settingNav = 'settingNav';
 
   // Home
   static const total = 'total';
@@ -61,6 +62,7 @@ class LanguageKey {
   static const babyVisitConfirm = 'Baby visit confirmation';
   static const confirmYourVisit = 'Confirming your visit with love';
   static const yesSure = 'yes_sure';
+  static const kid = 'kid';
 
   // Setting
   static const category = 'category';
@@ -92,7 +94,7 @@ class LanguageKey {
   // Message error
   static const emailInvalid = 'email_invalid';
   static const passwordInvalid = 'password_invalid';
-  static const anErrorOccured = 'an_error_occured';
+  static const anErrorOccurred = 'an_error_occurred';
   static const invalidAccess = 'your_access_is_invalid';
   static const expiredAccess = 'your_access_is_expired';
   static const badInternetConnection = 'network_error';

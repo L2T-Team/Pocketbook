@@ -42,7 +42,7 @@ class CustomizeBottomNavigationBar extends StatelessWidget {
     return [
       /// Home
       BottomNavigationBarItem(
-        label: LanguageKey.home.tr,
+        label: LanguageKey.homeNav.tr,
         icon: BottomIcon(
           imageAsset: indexScreen == 0
               ? AppImages.icHomeSelected
@@ -55,7 +55,7 @@ class CustomizeBottomNavigationBar extends StatelessWidget {
 
       /// Report
       BottomNavigationBarItem(
-        label: LanguageKey.report.tr,
+        label: LanguageKey.reportNav.tr,
         icon: BottomIcon(
           imageAsset: indexScreen == 1
               ? AppImages.icReportSelected
@@ -76,7 +76,7 @@ class CustomizeBottomNavigationBar extends StatelessWidget {
 
       /// Kid
       BottomNavigationBarItem(
-        label: LanguageKey.kid.tr,
+        label: LanguageKey.kidNav.tr,
         icon: BottomIcon(
           imageAsset: indexScreen == 3
               ? AppImages.icKidSelected
@@ -89,7 +89,7 @@ class CustomizeBottomNavigationBar extends StatelessWidget {
 
       /// Setting
       BottomNavigationBarItem(
-        label: LanguageKey.setting.tr,
+        label: LanguageKey.settingNav.tr,
         icon: BottomIcon(
           imageAsset: indexScreen == 4
               ? AppImages.icSettingSelected

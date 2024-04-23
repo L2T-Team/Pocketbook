@@ -118,7 +118,7 @@ class DeleteKidDayPopup extends StatelessWidget {
                             deleteAction();
                           },
                           child: Text(
-                            LanguageKey.delete.tr,
+                            LanguageKey.yesDelete.tr,
                             textAlign: TextAlign.center,
                             style: TextStyles.mediumTextStyle(
                               size: 16.0,
