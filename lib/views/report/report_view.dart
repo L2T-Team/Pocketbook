@@ -28,7 +28,7 @@ class ReportView extends GetWidget<ReportController> {
           children: [
             /// Header
             HeaderWidget(
-              title: LanguageKey.report.tr,
+              title: LanguageKey.reportNav.tr,
               isHiddenBack: true,
             ),
 

@@ -14,6 +14,7 @@ class EnglishLanguage {
       LanguageKey.wrongPassword:
           'You have entered an invalid username or password',
       LanguageKey.yes: 'Yes',
+      LanguageKey.yesDelete: 'Delete',
       LanguageKey.no: 'No',
       LanguageKey.ok: 'OK',
       LanguageKey.requestPermission: 'An error has occurred',
@@ -23,10 +24,10 @@ class EnglishLanguage {
           'Requires access to gallery. Go to app settings and enable permissions',
 
       // Bottom Bar
-      LanguageKey.home: 'Home',
-      LanguageKey.report: 'Report',
-      LanguageKey.kid: 'Kid',
-      LanguageKey.setting: 'Me',
+      LanguageKey.homeNav: 'Home',
+      LanguageKey.reportNav: 'Report',
+      LanguageKey.kidNav: 'Kid',
+      LanguageKey.settingNav: 'Me',
 
       // Home
       LanguageKey.total: 'Total balance',
@@ -63,6 +64,7 @@ class EnglishLanguage {
       LanguageKey.babyVisitConfirm: 'Baby visit confirmation',
       LanguageKey.confirmYourVisit: 'Confirming your visit with love',
       LanguageKey.yesSure: 'Yes, sure',
+      LanguageKey.kid: 'Kid',
 
       // Setting
       LanguageKey.category: 'Category',
@@ -96,7 +98,7 @@ class EnglishLanguage {
       // Message Error
       LanguageKey.emailInvalid: 'Email Invalid',
       LanguageKey.passwordInvalid: 'Password Invalid',
-      LanguageKey.anErrorOccured: 'An error occured',
+      LanguageKey.anErrorOccurred: 'An error occured',
       LanguageKey.invalidAccess: 'Your access is invalid',
       LanguageKey.expiredAccess: 'Your access is expired, please login again',
       LanguageKey.badInternetConnection: 'Network error',
