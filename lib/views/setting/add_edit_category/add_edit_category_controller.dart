@@ -102,31 +102,31 @@ class AddEditCategoryController extends GetxController {
       return;
     }
     try {
-      CroppedFile? croppedFile = await ImageCropper().cropImage(
-        sourcePath: file.path,
-        aspectRatioPresets: [
-          CropAspectRatioPreset.square,
-        ],
-        cropStyle: CropStyle.circle,
-        uiSettings: [
-          AndroidUiSettings(
-            toolbarTitle: '',
-          ),
-          IOSUiSettings(
-            title: '',
-          ),
-          WebUiSettings(
-            context: context,
-          ),
-        ],
-      );
+      // CroppedFile? croppedFile = await ImageCropper().cropImage(
+      //   sourcePath: file.path,
+      //   aspectRatioPresets: [
+      //     CropAspectRatioPreset.square,
+      //   ],
+      //   cropStyle: CropStyle.circle,
+      //   uiSettings: [
+      //     AndroidUiSettings(
+      //       toolbarTitle: '',
+      //     ),
+      //     IOSUiSettings(
+      //       title: '',
+      //     ),
+      //     WebUiSettings(
+      //       context: context,
+      //     ),
+      //   ],
+      // );
 
       /// Upload
       // final path = file.path;
       final nameImage = '${const Uuid().v4()}.jpg';
       final metadata = SettableMetadata(contentType: "image/jpeg");
       final storageRef = FirebaseStorage.instance.ref().child(nameImage);
-      final uploadTask = storageRef.putData(await croppedFile!.readAsBytes(), metadata);
+      final uploadTask = storageRef.putData(await file.readAsBytes(), metadata);
 
       uploadTask.whenComplete(() async {
         /// Delete Url
