@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:pocketbook/model/responses/transaction_model.dart';
 import 'package:pocketbook/my_app.dart';
 import 'package:pocketbook/utils/app_constant.dart';
+import 'package:pocketbook/utils/app_helper.dart';
 import 'package:pocketbook/utils/app_routes.dart';
 import 'package:pocketbook/views/home/detail_transaction/widget/delete_transaction_popup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +34,13 @@ class DetailTransactionController extends GetxController {
         getDetailTransaction();
       }
     });
+  }
+
+  /// On Ready
+  @override
+  void onReady() {
+    super.onReady();
+    AppHelper.checkAuthorization();
   }
 
   //////////////////////////////////////////////////////////

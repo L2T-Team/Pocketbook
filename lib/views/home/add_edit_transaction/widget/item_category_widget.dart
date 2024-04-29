@@ -93,7 +93,12 @@ class ItemCategoryWidget extends StatelessWidget {
                                         color: Colors.black.withOpacity(0.5),
                                       ),
                                     )
-                                  : const SizedBox(),
+                                  : Image.asset(
+                                    AppImages.icCategoryDefault,
+                                    fit: BoxFit.cover,
+                                    width: 56.0,
+                                    height: 56.0,
+                                  ),
                             ),
                           ),
 

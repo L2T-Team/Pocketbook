@@ -19,154 +19,157 @@ class AddEditCategoryView extends GetWidget<AddEditCategoryController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.white,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Column(
-          children: [
-            /// Header
-            Obx(
-              () => HeaderWidget(
-                title: controller.categoryDetail.value != null
-                    ? LanguageKey.editNewCategory.tr
-                    : LanguageKey.addNewCategory.tr,
-              ),
-            ),
-
-            /// Body
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 24.0,
+        child: Container(
+          color: AppColor.white.withOpacity(0.0),
+          child: Column(
+            children: [
+              /// Header
+              Obx(
+                () => HeaderWidget(
+                  title: controller.categoryDetail.value != null
+                      ? LanguageKey.editNewCategory.tr
+                      : LanguageKey.addNewCategory.tr,
                 ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      /// Image
-                      GestureDetector(
-                        onTap: () {
-                          controller.photoAction(context);
-                        },
-                        child: Container(
-                          width: 80.0,
-                          height: 80.0,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40.0),
-                            color: AppColor.grey201913.withOpacity(0.4),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(40.0),
-                            child: Obx(
-                              () => controller.imageUrl.value.isNotEmpty
-                                  ? CachedNetworkImage(
-                                      imageUrl: controller.imageUrl.value,
-                                      width: 80.0,
-                                      height: 80.0,
-                                      fit: BoxFit.cover,
-                                      placeholder: (context, url) =>
-                                          SpinKitCircle(
-                                        color: Colors.black.withOpacity(0.5),
-                                      ),
-                                    )
-                                  : Image.asset(
-                                      AppImages.icImage,
-                                      width: 80.0,
-                                      height: 80.0,
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
-                          ),
-                        ),
-                      ),
+              ),
 
-                      /// Name Image/Add/Update
-                      GestureDetector(
-                        onTap: () {
-                          controller.photoAction(context);
-                        },
-                        child: Obx(
-                          () => Container(
+              /// Body
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 24.0,
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        /// Image
+                        GestureDetector(
+                          onTap: () {
+                            controller.photoAction(context);
+                          },
+                          child: Container(
+                            width: 80.0,
+                            height: 80.0,
                             alignment: Alignment.center,
-                            margin: const EdgeInsets.only(top: 12.0),
-                            child: GradientText(
-                              controller.categoryDetail.value == null
-                                  ? LanguageKey.addImage.tr
-                                  : LanguageKey.updatePhoto.tr,
-                              style: TextStyles.mediumTextStyle(
-                                size: 12.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40.0),
+                              color: AppColor.grey201913.withOpacity(0.4),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(40.0),
+                              child: Obx(
+                                () => controller.imageUrl.value.isNotEmpty
+                                    ? CachedNetworkImage(
+                                        imageUrl: controller.imageUrl.value,
+                                        width: 80.0,
+                                        height: 80.0,
+                                        fit: BoxFit.cover,
+                                        placeholder: (context, url) =>
+                                            SpinKitCircle(
+                                          color: Colors.black.withOpacity(0.5),
+                                        ),
+                                      )
+                                    : Image.asset(
+                                        AppImages.icImage,
+                                        width: 80.0,
+                                        height: 80.0,
+                                        fit: BoxFit.cover,
+                                      ),
                               ),
-                              textAlign: TextAlign.center,
-                              colors: const [
-                                AppColor.pinkF27781,
-                                AppColor.pinkF2A0C6,
-                              ],
                             ),
                           ),
                         ),
-                      ),
 
-                      /// Name Category
-                      Obx(
-                        () => Container(
-                          margin: const EdgeInsets.only(top: 24),
-                          child: TextFieldWidget(
-                            titleLabel: LanguageKey.name.tr,
-                            focusNode: controller.focusNodeName,
-                            controller: controller.controllerName,
-                            hintText: LanguageKey.name.tr,
-                            onChange: (String text) {
-                              controller.validateButtonAction();
-                            },
-                            isFocus: controller.isFocusName.value,
+                        /// Name Image/Add/Update
+                        GestureDetector(
+                          onTap: () {
+                            controller.photoAction(context);
+                          },
+                          child: Obx(
+                            () => Container(
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.only(top: 12.0),
+                              child: GradientText(
+                                controller.categoryDetail.value == null
+                                    ? LanguageKey.addImage.tr
+                                    : LanguageKey.updatePhoto.tr,
+                                style: TextStyles.mediumTextStyle(
+                                  size: 12.0,
+                                ),
+                                textAlign: TextAlign.center,
+                                colors: const [
+                                  AppColor.pinkF27781,
+                                  AppColor.pinkF2A0C6,
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
 
-                      /// Type Category
-                      Obx(
-                        () => Container(
-                          margin: const EdgeInsets.only(top: 24),
-                          child: TypeCategoryWidget(
-                            itemSelected: controller.itemSelected.value,
-                            selectedAction: (String selected) {
-                              controller.itemSelected.value = selected;
-                            },
-                            isIgnore: controller.categoryDetail.value != null,
+                        /// Name Category
+                        Obx(
+                          () => Container(
+                            margin: const EdgeInsets.only(top: 24),
+                            child: TextFieldWidget(
+                              titleLabel: LanguageKey.name.tr,
+                              focusNode: controller.focusNodeName,
+                              controller: controller.controllerName,
+                              hintText: LanguageKey.name.tr,
+                              onChange: (String text) {
+                                controller.validateButtonAction();
+                              },
+                              isFocus: controller.isFocusName.value,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+
+                        /// Type Category
+                        Obx(
+                          () => Container(
+                            margin: const EdgeInsets.only(top: 24, bottom: 30),
+                            child: TypeCategoryWidget(
+                              itemSelected: controller.itemSelected.value,
+                              selectedAction: (String selected) {
+                                controller.itemSelected.value = selected;
+                              },
+                              isIgnore: controller.categoryDetail.value != null,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
 
-            /// Bottom Button
-            SafeArea(
-              top: false,
-              bottom: true,
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 12.0,
-                ),
-                child: Obx(
-                  () => ButtonWidget(
-                    title: controller.categoryDetail.value != null
-                        ? LanguageKey.save.tr
-                        : LanguageKey.createNew.tr,
-                    onTap: () {
-                      controller.addEditAction(context);
-                    },
-                    enable: controller.enableButton.value,
-                    isLoading: controller.isLoading.value,
+              /// Bottom Button
+              SafeArea(
+                top: false,
+                bottom: true,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 12.0,
+                  ),
+                  child: Obx(
+                    () => ButtonWidget(
+                      title: controller.categoryDetail.value != null
+                          ? LanguageKey.save.tr
+                          : LanguageKey.createNew.tr,
+                      onTap: () {
+                        controller.addEditAction(context);
+                      },
+                      enable: controller.enableButton.value,
+                      isLoading: controller.isLoading.value,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:pocketbook/model/responses/category_model.dart';
 import 'package:pocketbook/my_app.dart';
 import 'package:pocketbook/utils/app_constant.dart';
+import 'package:pocketbook/utils/app_helper.dart';
 import 'package:pocketbook/utils/app_routes.dart';
 import 'package:pocketbook/views/setting/detail_category/widget/delete_category_popup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,6 +36,13 @@ class DetailCategoryController extends GetxController {
         getDetailCategory();
       }
     });
+  }
+
+  /// On Ready
+  @override
+  void onReady() {
+    super.onReady();
+    AppHelper.checkAuthorization();
   }
 
   //////////////////////////////////////////////////////////

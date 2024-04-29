@@ -2,7 +2,6 @@ import 'package:event_bus/event_bus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/core/theme/app_theme.dart';
 import 'package:pocketbook/init_page.dart';
@@ -74,12 +73,8 @@ Future<void> runMyApp({
       getPages: AppRoutes.mainRoutes,
       theme: AppThemes.lightTheme,
       translations: Language(),
-      builder: (context, child) => FlutterWebFrame(
-        builder: (context) => InitPage(
-          child: child ?? const SizedBox(),
-        ),
-        maximumSize: const Size(480.0, 1000.0),
-        backgroundColor: Colors.grey.withOpacity(0.1),
+      builder: (context, child) => InitPage(
+        child: child ?? const SizedBox(),
       ),
     ),
   );

@@ -40,6 +40,13 @@ class KidController extends GetxController {
     getKidConfirms();
   }
 
+  /// On Ready
+  @override
+  void onReady() {
+    super.onReady();
+    AppHelper.checkAuthorization();
+  }
+
   //////////////////////////////////////////////////////////
   /// Get Kid Confirm
   //////////////////////////////////////////////////////////

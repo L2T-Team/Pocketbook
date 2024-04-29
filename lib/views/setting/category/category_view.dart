@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/language/language.dart';
+import 'package:pocketbook/utils/app_asset.dart';
 import 'package:pocketbook/utils/app_style.dart';
 import 'package:pocketbook/views/login/widget/button_widget.dart';
 import 'package:pocketbook/views/setting/category/category_controller.dart';
@@ -95,7 +96,12 @@ class CategoryView extends GetWidget<CategoryController> {
                                                     .withOpacity(0.5),
                                               ),
                                             )
-                                          : const SizedBox(),
+                                          : Image.asset(
+                                              AppImages.icCategoryDefault,
+                                              fit: BoxFit.cover,
+                                              width: 56.0,
+                                              height: 56.0,
+                                            ),
                                     ),
                                   ),
 

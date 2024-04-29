@@ -47,6 +47,13 @@ class AddEditCategoryController extends GetxController {
     focusNodeName.addListener(_onFocusChangeName);
   }
 
+  /// On Ready
+  @override
+  void onReady() {
+    super.onReady();
+    AppHelper.checkAuthorization();
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -62,7 +69,7 @@ class AddEditCategoryController extends GetxController {
   void validateButtonAction() {
     Future.delayed(const Duration(milliseconds: 10)).then((value) {
       enableButton.value =
-          controllerName.text.trim().isNotEmpty && imageUrl.value.isNotEmpty;
+          controllerName.text.trim().isNotEmpty;
     });
   }
 

@@ -47,6 +47,13 @@ class SettingController extends GetxController {
     getUserName();
   }
 
+  /// On Ready
+  @override
+  void onReady() {
+    super.onReady();
+    AppHelper.checkAuthorization();
+  }
+
   @override
   void dispose() {
     super.dispose();

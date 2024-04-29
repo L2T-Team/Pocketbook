@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pocketbook/model/responses/kid_confirm_model.dart';
+import 'package:pocketbook/utils/app_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pocketbook/repos/auth_repo.dart';
 
@@ -19,5 +20,12 @@ class HistoryKidController extends GetxController {
   void onInit() {
     super.onInit();
     listKids.value = Get.arguments;
+  }
+
+  /// On Ready
+  @override
+  void onReady() {
+    super.onReady();
+    AppHelper.checkAuthorization();
   }
 }
