@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pocketbook/language/language.dart';
+import 'package:pocketbook/utils/app_routes.dart';
 import 'package:pocketbook/widget_components/confirm_dialog.dart';
 import 'app_constant.dart';
 import 'app_extension.dart';
@@ -281,5 +283,14 @@ class AppHelper {
       return true;
     }
     return false;
+  }
+
+  /// Check Login
+  static void checkAuthorization() {
+    final currentRoute = Get.currentRoute;
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null && currentRoute != RoutesName.login) {
+      Get.offAllNamed(RoutesName.login);
+    }
   }
 }

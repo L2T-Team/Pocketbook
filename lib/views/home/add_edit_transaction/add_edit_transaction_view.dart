@@ -22,140 +22,146 @@ class AddEditTransactionView extends GetWidget<AddEditTransactionController> {
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Column(
-          children: [
-            /// Header
-            Obx(
-              () => HeaderWidget(
-                title: controller.transactionDetail.value != null
-                    ? LanguageKey.editTransaction.tr
-                    : LanguageKey.addNewTransaction.tr,
+        child: Container(
+          color: AppColor.white.withOpacity(0.0),
+          child: Column(
+            children: [
+              /// Header
+              Obx(
+                () => HeaderWidget(
+                  title: controller.transactionDetail.value != null
+                      ? LanguageKey.editTransaction.tr
+                      : LanguageKey.addNewTransaction.tr,
+                ),
               ),
-            ),
 
-            /// Depense
-            Obx(
-              () => IgnorePointer(
-                ignoring: controller.transactionDetail.value != null,
-                child: Opacity(
-                  opacity: controller.transactionDetail.value != null ? 0.5 : 1,
-                  child: CategoryHeaderWidget(
-                    itemSelected: controller.indicatorSelected.value,
-                    indicatorSelectedAction: (String selected) {
-                      controller.indicatorSelected.value = selected;
-                    },
+              /// Depense
+              Obx(
+                () => IgnorePointer(
+                  ignoring: controller.transactionDetail.value != null,
+                  child: Opacity(
+                    opacity:
+                        controller.transactionDetail.value != null ? 0.5 : 1,
+                    child: CategoryHeaderWidget(
+                      itemSelected: controller.indicatorSelected.value,
+                      indicatorSelectedAction: (String selected) {
+                        controller.indicatorSelected.value = selected;
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
 
-            /// Body
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      /// DateTime
-                      Obx(
-                        () => DateWidget(
-                          date: controller.currentDate.value,
-                          nextAction: controller.nextDateAction,
-                          previousAction: controller.previousDateAction,
-                          selectedDateAction: (DateTime date) {
-                            controller.currentDate.value = date;
-                          },
-                        ),
-                      ),
-
-                      /// Amount
-                      Obx(
-                        () => Container(
-                          margin: const EdgeInsets.symmetric(vertical: 24.0),
-                          child: AmountTextFieldWidget(
-                            titleLabel: LanguageKey.amount.tr,
-                            focusNode: controller.focusNodeAmount,
-                            controller: controller.controllerAmount,
-                            hintText: '',
-                            keyboardType: const TextInputType.numberWithOptions(
-                                decimal: true),
-                            onChange: (String text) {
-                              controller.validateButtonAction();
+              /// Body
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        /// DateTime
+                        Obx(
+                          () => DateWidget(
+                            date: controller.currentDate.value,
+                            nextAction: controller.nextDateAction,
+                            previousAction: controller.previousDateAction,
+                            selectedDateAction: (DateTime date) {
+                              controller.currentDate.value = date;
                             },
-                            isFocus: controller.isFocusAmount.value,
                           ),
                         ),
-                      ),
 
-                      /// Category List
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 16.0),
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          LanguageKey.category.tr,
-                          textAlign: TextAlign.left,
-                          style: TextStyles.mediumTextStyle(
-                            size: 14.0,
-                            color: AppColor.black1C2030,
+                        /// Amount
+                        Obx(
+                          () => Container(
+                            margin: const EdgeInsets.symmetric(vertical: 24.0),
+                            child: AmountTextFieldWidget(
+                              titleLabel: LanguageKey.amount.tr,
+                              focusNode: controller.focusNodeAmount,
+                              controller: controller.controllerAmount,
+                              hintText: '',
+                              keyboardType:
+                                  const TextInputType.numberWithOptions(
+                                      decimal: true),
+                              onChange: (String text) {
+                                controller.validateButtonAction();
+                              },
+                              isFocus: controller.isFocusAmount.value,
+                            ),
                           ),
                         ),
-                      ),
-                      Obx(
-                        () => ItemCategoryWidget(
-                          listCategories: controller.listCategories.value,
-                          indicatorSelected: controller.indicatorSelected.value,
-                          categorySelectedAction: (CategoryModel category) {
-                            controller.categorySelected.value = category;
-                          },
-                          categorySelected: controller.categorySelected.value,
-                          navigateCategory: () {
-                            controller.navigateAddCategory();
-                          },
-                        ),
-                      ),
 
-                      /// Name
-                      Obx(
-                        () => Container(
-                          margin: const EdgeInsets.only(top: 30, bottom: 20),
-                          child: TextFieldWidget(
-                            titleLabel: LanguageKey.name.tr,
-                            focusNode: controller.focusNodeName,
-                            controller: controller.controllerName,
-                            hintText: LanguageKey.transactionName.tr,
-                            onChange: (String text) {
-                              controller.validateButtonAction();
+                        /// Category List
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 16.0),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            LanguageKey.category.tr,
+                            textAlign: TextAlign.left,
+                            style: TextStyles.mediumTextStyle(
+                              size: 14.0,
+                              color: AppColor.black1C2030,
+                            ),
+                          ),
+                        ),
+                        Obx(
+                          () => ItemCategoryWidget(
+                            listCategories: controller.listCategories.value,
+                            indicatorSelected:
+                                controller.indicatorSelected.value,
+                            categorySelectedAction: (CategoryModel category) {
+                              controller.categorySelected.value = category;
                             },
-                            isFocus: controller.isFocusName.value,
+                            categorySelected: controller.categorySelected.value,
+                            navigateCategory: () {
+                              controller.navigateAddCategory();
+                            },
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
 
-            /// Bottom Button
-            SafeArea(
-              top: false,
-              bottom: true,
-              child: Obx(
-                () => Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 12.0),
-                  child: ButtonWidget(
-                    title: LanguageKey.save.tr,
-                    onTap: () {
-                      controller.saveAction(context);
-                    },
-                    enable: controller.enableButton.value,
-                    isLoading: controller.isLoading.value,
+                        /// Name
+                        Obx(
+                          () => Container(
+                            margin: const EdgeInsets.only(top: 30, bottom: 40),
+                            child: TextFieldWidget(
+                              titleLabel: LanguageKey.name.tr,
+                              focusNode: controller.focusNodeName,
+                              controller: controller.controllerName,
+                              hintText: LanguageKey.transactionName.tr,
+                              onChange: (String text) {
+                                controller.validateButtonAction();
+                              },
+                              isFocus: controller.isFocusName.value,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+
+              /// Bottom Button
+              SafeArea(
+                top: false,
+                bottom: true,
+                child: Obx(
+                  () => Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 12.0),
+                    child: ButtonWidget(
+                      title: LanguageKey.save.tr,
+                      onTap: () {
+                        controller.saveAction(context);
+                      },
+                      enable: controller.enableButton.value,
+                      isLoading: controller.isLoading.value,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

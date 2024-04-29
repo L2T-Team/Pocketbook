@@ -19,26 +19,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="on-board-img" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Frame" translatesAutoresizingMaskIntoConstraints="NO" id="zko-uT-hZY">
-                                <rect key="frame" x="136.66666666666666" y="366" width="119.99999999999997" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="Lir-FP-NMA"/>
-                                    <constraint firstAttribute="height" constant="120" id="Oul-ta-v3d"/>
-                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.015686274509803921" green="0.23921568627450979" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1a2-6s-vTC"/>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4X2-HB-R7a"/>
-                            <constraint firstItem="zko-uT-hZY" firstAttribute="centerX" secondItem="YRO-k0-Ey4" secondAttribute="centerX" id="76c-KN-TUj"/>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="9cW-s0-nuT"/>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="CRH-dY-OYa"/>
-                            <constraint firstItem="zko-uT-hZY" firstAttribute="centerY" secondItem="YRO-k0-Ey4" secondAttribute="centerY" id="tfA-Uc-Q4Z"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -48,7 +39,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Frame" width="120" height="120"/>
-        <image name="image" width="375" height="812"/>
+        <image name="on-board-img" width="1125" height="2436"/>
     </resources>
 </document>

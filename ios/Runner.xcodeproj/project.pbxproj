@@ -501,7 +501,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88V3XRS5U2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Pocketbook;
+				INFOPLIST_KEY_CFBundleDisplayName = "今天也要存钱鸭";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -691,7 +691,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Pocketbook;
+				INFOPLIST_KEY_CFBundleDisplayName = "今天也要存钱鸭";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -721,7 +721,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 88V3XRS5U2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Pocketbook;
+				INFOPLIST_KEY_CFBundleDisplayName = "今天也要存钱鸭";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -65,6 +65,8 @@ class TextFieldWidget extends StatelessWidget {
                     color: AppColor.black201913,
                     size: 14.0,
                   ),
+                  enableSuggestions: false,
+                  autocorrect: false,
                   onChanged: onChange,
                   focusNode: focusNode,
                   keyboardType: keyboardType,

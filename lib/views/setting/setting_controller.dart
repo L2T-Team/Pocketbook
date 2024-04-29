@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -47,6 +45,13 @@ class SettingController extends GetxController {
     ///
     getAvatar();
     getUserName();
+  }
+
+  /// On Ready
+  @override
+  void onReady() {
+    super.onReady();
+    AppHelper.checkAuthorization();
   }
 
   @override
@@ -192,35 +197,31 @@ class SettingController extends GetxController {
       return;
     }
     try {
-      // CroppedFile? croppedFile = await ImageCropper().cropImage(
-      //   sourcePath: file.path,
-      //   aspectRatioPresets: [
-      //     CropAspectRatioPreset.square,
-      //   ],
-      //   cropStyle: CropStyle.circle,
-      //   uiSettings: [
-      //     AndroidUiSettings(
-      //         toolbarTitle: '',
-      //         toolbarColor: Colors.deepOrange,
-      //         toolbarWidgetColor: Colors.white,
-      //         initAspectRatio: CropAspectRatioPreset.original,
-      //         lockAspectRatio: false),
-      //     IOSUiSettings(
-      //       title: '',
-      //     ),
-      //     WebUiSettings(
-      //       context: context,
-      //     ),
-      //   ],
-      // );
-      // isLoading(true);
+      CroppedFile? croppedFile = await ImageCropper().cropImage(
+        sourcePath: file.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+        ],
+        cropStyle: CropStyle.circle,
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: '',
+          ),
+          IOSUiSettings(
+            title: '',
+          ),
+          WebUiSettings(
+            context: context,
+          ),
+        ],
+      );
+      isLoading(true);
 
       /// Upload
-      // final path = croppedFile?.path ?? '';
       final nameImage = '${const Uuid().v4()}.jpg';
       final metadata = SettableMetadata(contentType: "image/jpeg");
       final storageRef = FirebaseStorage.instance.ref().child(nameImage);
-      final uploadTask = storageRef.putData(await file.readAsBytes(), metadata);
+      final uploadTask = storageRef.putData(await croppedFile!.readAsBytes(), metadata);
 
       uploadTask.whenComplete(() async {
         /// Delete Url

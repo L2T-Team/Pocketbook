@@ -37,4 +37,5 @@ class AppImages {
   static const String icDropdownWhiteNext = 'assets/images/dropdown_white_next.png';
   static const String icDropdownNext = 'assets/images/dropdown_next.png';
   static const String icDropdown = 'assets/images/dropdown.png';
+  static const String icCategoryDefault = 'assets/images/ic_category_default.png';
 }

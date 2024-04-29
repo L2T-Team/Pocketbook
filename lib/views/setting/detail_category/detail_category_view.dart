@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/language/language.dart';
+import 'package:pocketbook/utils/app_asset.dart';
 import 'package:pocketbook/utils/app_style.dart';
 import 'package:pocketbook/views/login/widget/button_widget.dart';
 import 'package:pocketbook/views/setting/detail_category/detail_category_controller.dart';
@@ -61,7 +62,12 @@ class DetailCategoryView extends GetWidget<DetailCategoryController> {
                                         color: Colors.black.withOpacity(0.5),
                                       ),
                                     )
-                                  : const SizedBox(),
+                                  : Image.asset(
+                                      AppImages.icCategoryDefault,
+                                      fit: BoxFit.cover,
+                                      width: 80.0,
+                                      height: 80.0,
+                                    ),
                             ),
                           ),
                         ),

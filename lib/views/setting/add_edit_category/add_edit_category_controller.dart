@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -49,6 +47,13 @@ class AddEditCategoryController extends GetxController {
     focusNodeName.addListener(_onFocusChangeName);
   }
 
+  /// On Ready
+  @override
+  void onReady() {
+    super.onReady();
+    AppHelper.checkAuthorization();
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -64,7 +69,7 @@ class AddEditCategoryController extends GetxController {
   void validateButtonAction() {
     Future.delayed(const Duration(milliseconds: 10)).then((value) {
       enableButton.value =
-          controllerName.text.trim().isNotEmpty && imageUrl.value.isNotEmpty;
+          controllerName.text.trim().isNotEmpty;
     });
   }
 
@@ -89,6 +94,7 @@ class AddEditCategoryController extends GetxController {
   /// Crop Circle Image
   void cropCircleImage(BuildContext context, XFile file) async {
     isLoading(true);
+
     /// Check Image Over 10 MB
     if (await AppHelper.checkSizeImageOver10Mb(file.path)) {
       isLoading(false);
@@ -96,34 +102,31 @@ class AddEditCategoryController extends GetxController {
       return;
     }
     try {
-      // CroppedFile? croppedFile = await ImageCropper().cropImage(
-      //   sourcePath: file.path,
-      //   aspectRatioPresets: [
-      //     CropAspectRatioPreset.square,
-      //   ],
-      //   cropStyle: CropStyle.circle,
-      //   uiSettings: [
-      //     AndroidUiSettings(
-      //         toolbarTitle: '',
-      //         toolbarColor: Colors.deepOrange,
-      //         toolbarWidgetColor: Colors.white,
-      //         initAspectRatio: CropAspectRatioPreset.original,
-      //         lockAspectRatio: false),
-      //     IOSUiSettings(
-      //       title: '',
-      //     ),
-      //     WebUiSettings(
-      //       context: context,
-      //     ),
-      //   ],
-      // );
+      CroppedFile? croppedFile = await ImageCropper().cropImage(
+        sourcePath: file.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+        ],
+        cropStyle: CropStyle.circle,
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: '',
+          ),
+          IOSUiSettings(
+            title: '',
+          ),
+          WebUiSettings(
+            context: context,
+          ),
+        ],
+      );
 
       /// Upload
       // final path = file.path;
       final nameImage = '${const Uuid().v4()}.jpg';
       final metadata = SettableMetadata(contentType: "image/jpeg");
       final storageRef = FirebaseStorage.instance.ref().child(nameImage);
-      final uploadTask = storageRef.putData(await file.readAsBytes(), metadata);
+      final uploadTask = storageRef.putData(await croppedFile!.readAsBytes(), metadata);
 
       uploadTask.whenComplete(() async {
         /// Delete Url

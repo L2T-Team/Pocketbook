@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pocketbook/my_app.dart';
 import 'package:pocketbook/utils/app_constant.dart';
+import 'package:pocketbook/utils/app_helper.dart';
 import 'package:pocketbook/views/main/nested_screen/nested_navigation_kid.dart';
 import 'package:pocketbook/views/main/nested_screen/nested_navigation_report.dart';
 import 'package:pocketbook/views/main/nested_screen/nested_navigation_home.dart';
@@ -27,6 +28,14 @@ class MainViewModel extends GetxController {
     });
   }
 
+  /// On Ready
+  @override
+  void onReady() {
+    super.onReady();
+    AppHelper.checkAuthorization();
+  }
+
+  /// Dispose
   @override
   void dispose() {
     super.dispose();

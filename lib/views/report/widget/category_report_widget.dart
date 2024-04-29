@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pocketbook/language/language.dart';
 import 'package:pocketbook/model/responses/category_model.dart';
 import 'package:pocketbook/model/responses/transaction_model.dart';
+import 'package:pocketbook/utils/app_asset.dart';
 import 'package:pocketbook/utils/app_helper.dart';
 import 'package:pocketbook/utils/app_style.dart';
 import 'package:get/get.dart';
@@ -105,7 +106,12 @@ class CategoryReportWidget extends StatelessWidget {
                                       color: Colors.black.withOpacity(0.5),
                                     ),
                                   )
-                                : const SizedBox(),
+                                : Image.asset(
+                                    AppImages.icCategoryDefault,
+                                    fit: BoxFit.cover,
+                                    width: 40.0,
+                                    height: 40.0,
+                                  ),
                           ),
                         ),
 

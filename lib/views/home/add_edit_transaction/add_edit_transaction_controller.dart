@@ -75,6 +75,13 @@ class AddEditTransactionController extends GetxController {
     });
   }
 
+  /// On Ready
+  @override
+  void onReady() {
+    super.onReady();
+    AppHelper.checkAuthorization();
+  }
+
   /// Dispose
   @override
   void dispose() {
