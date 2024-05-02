@@ -10,7 +10,7 @@ class InitPage extends StatefulWidget {
 }
 
 class _InitPageState extends State<InitPage> with WidgetsBindingObserver {
-  bool isUpdatedLastest = false;
+  bool isUpdatedLatest = false;
   bool isShowPopup = false;
 
   @override
